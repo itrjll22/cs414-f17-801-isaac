@@ -1,0 +1,49 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+   
+      <property name = "hibernate.dialect">
+         org.hibernate.dialect.MySQL5InnoDBDialect
+      </property>
+      
+      <property name = "hibernate.connection.driver_class">
+         com.mysql.jdbc.Driver
+      </property>
+      
+      <!-- Assume test is the database name -->
+      
+      <property name = "hibernate.connection.url">
+         jdbc:mysql://localhost:3306/gym_manager_hibernate
+      </property>
+      
+      <property name = "hibernate.connection.username">
+         root
+      </property>
+      
+      <property name = "hibernate.connection.password">
+         root
+      </property>
+      
+      <property name="hibernate.hbm2ddl.import_files">initial_data.sql</property>
+      
+      <property name="hibernate.hbm2ddl.auto">create</property>
+      <property name="show_sql">true</property>
+
+      <mapping class = "edu.colostate.cs.cs414.project.models.Address"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.Customer"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.Email"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.EquipmentItem"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.Exercise"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.ExerciseSet"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.HealthInsuranceProvider"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.Manager"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.Phone"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.Role"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.Trainer"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.UserAccount"/>
+      <mapping class = "edu.colostate.cs.cs414.project.models.UserInformation"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.WorkoutRoutine"/>
+   </session-factory>
+</hibernate-configuration>
