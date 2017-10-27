@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -66,7 +68,7 @@ public class login {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Sign In");
 		btnNewButton.setBounds(154, 208, 117, 25);
 		
 		
@@ -85,7 +87,7 @@ public class login {
 		
 		frame.getContentPane().add(btnNewButton);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(126, 171, 162, 25);
 		frame.getContentPane().add(textField_1);

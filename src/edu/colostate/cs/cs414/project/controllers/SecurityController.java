@@ -24,6 +24,8 @@ public class SecurityController {
 	
 	private SecurityController(){
 		
+		try{
+		
 		UserAccount ua = new UserAccount("itrjll22", "password123");
 		
 		UserInformation userInfo = new UserInformation(
@@ -36,6 +38,9 @@ public class SecurityController {
 		
 		dao.addManager(manager);
 		
+		}catch(Exception ex){
+			
+		}
 	}
 	
 	public static SecurityController getInstance(){ return instance;}
