@@ -6,7 +6,7 @@ import edu.colostate.cs.cs414.project.models.Trainer;
 
 public interface IPersistenceService {
 
-	public boolean saveTrainer(Trainer trainer);
+	public boolean addTrainer(Trainer trainer);
 	
 	public boolean editTrainer(Trainer trainer);
 	

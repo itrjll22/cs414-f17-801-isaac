@@ -13,7 +13,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 
 	private static final SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	
-	public boolean saveTrainer(Trainer trainer){
+	public boolean addTrainer(Trainer trainer){
 		
 		Session session = sessionFactory.openSession();
 		

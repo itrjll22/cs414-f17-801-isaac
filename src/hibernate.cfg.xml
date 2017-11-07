@@ -40,7 +40,7 @@
        <mapping class = "edu.colostate.cs.cs414.project.models.HealthInsuranceProvider"/>
       <mapping class = "edu.colostate.cs.cs414.project.models.Manager"/>
        <mapping class = "edu.colostate.cs.cs414.project.models.Phone"/>
-      <mapping class = "edu.colostate.cs.cs414.project.models.Role"/>
+
       <mapping class = "edu.colostate.cs.cs414.project.models.Trainer"/>
        <mapping class = "edu.colostate.cs.cs414.project.models.UserAccount"/>
       <mapping class = "edu.colostate.cs.cs414.project.models.UserInformation"/>

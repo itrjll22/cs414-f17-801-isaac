@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import edu.colostate.cs.cs414.project.utilities.SecurityUtility;
 
@@ -30,13 +31,13 @@ public class UserAccount {
 	private String id;
 	
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "userAccount", cascade = CascadeType.ALL, optional = true)
-	Trainer trainer;
+	private Trainer trainer;
 	
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "userAccount", cascade = CascadeType.ALL, optional = true)
-	Manager manager;
+	private Manager manager;
 	
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "userAccount", cascade = CascadeType.ALL, optional = true)
-	Customer customer;
+	private Customer customer;
 	
 	@Id
 	@Column(unique = true)
@@ -44,18 +45,12 @@ public class UserAccount {
 	private byte[] salt;
 	private byte[] passwordHash;
 	
-	@ManyToMany(
-	        targetEntity=Role.class,
-	        cascade={CascadeType.PERSIST, CascadeType.MERGE}
-	    )
-	    @JoinTable(
-	        name="UserAccount_Role",
-	        joinColumns=@JoinColumn(name="userAccount_id"),
-	        inverseJoinColumns=@JoinColumn(name="role_id")
-	    )
-	private Set<Role> roles;
+	@Transient
+	private Set<Enum_Role> roles;
 	
 	public UserAccount(){
+	
+		this.fillEnumRoles();
 		
 	}
 	
@@ -67,9 +62,12 @@ public class UserAccount {
 		this.salt = SecurityUtility.getSalt();
 		
 		this.passwordHash = SecurityUtility.hashPassword(password.toCharArray(), this.salt, 256, 256);
+		
+		this.fillEnumRoles();
+		
 	}
 	
-	public UserAccount(String username, String password, Set<Role> roles){
+	public UserAccount(String username, String password, Set<Enum_Role> roles){
 		this.id = java.util.UUID.randomUUID().toString();
 		
 		this.username = username;
@@ -79,14 +77,36 @@ public class UserAccount {
 		this.salt = SecurityUtility.getSalt();
 		
 		this.passwordHash = SecurityUtility.hashPassword(password.toCharArray(), this.salt, 256, 256);
+		
+		this.fillEnumRoles();
+		
+	}
+	
+	protected void fillEnumRoles(){
+		
+		this.roles = new HashSet<Enum_Role>();
+		
+		if(this.manager != null){
+			this.roles.add(Enum_Role.Manager);
+		}
+		
+		if(this.trainer != null){
+			this.roles.add(Enum_Role.Trainer);
+		}
+		
+		if(this.customer != null){
+			this.roles.add(Enum_Role.Customer);
+		}
+		
 	}
 	
 	public UserSecurityContext toSecurityContext(){
-
+		
+		this.fillEnumRoles();
+		
 		return new UserSecurityContext(this.roles, this.username);
 	
 	}
-
 
 	public String getId() {
 		return id;

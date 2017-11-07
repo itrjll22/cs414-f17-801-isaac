@@ -20,7 +20,7 @@ public class UserControllerTests {
 	@Before
 	public void setUp(){
 		
-		userController = new UserController();
+		userController = UserController.getInstance();
 		
 		dao = new HibernatePersistenceService();
 		

@@ -13,5 +13,7 @@ public class Response {
 		this.StatusText = "";
 		this.data = null;
 	}
+	
+	public boolean isSuccss(){return isSuccess;}
 
 }
