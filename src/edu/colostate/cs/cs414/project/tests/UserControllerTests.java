@@ -22,7 +22,7 @@ public class UserControllerTests {
 		
 		userController = UserController.getInstance();
 		
-		dao = new HibernatePersistenceService();
+		dao = HibernatePersistenceService.getInstance();
 		
 	}
 	
@@ -35,6 +35,7 @@ public class UserControllerTests {
 		UserAccount ua = new UserAccount("RandomUsername", "password123");
 		
 		UserInformation userInfo = new UserInformation(
+				"Isaac", "Trujillo",
 				new Phone("555-555-5555", "mobile"),
 				new Email("randomuser@randomdomain.com", "personal"),
 				new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
@@ -95,6 +96,7 @@ public class UserControllerTests {
 		UserAccount ua = new UserAccount("customerUsername", "asdsdasd");
 		
 		UserInformation userInfo = new UserInformation(
+				"Isaac", "Trujillo",
 				new Phone("555-555-4444", "mobile"),
 				new Email("customerUsername@randomdomain.com", "personal"),
 				new Address("123 Another Place", "", "Albuquerque", "NM", "87125"),

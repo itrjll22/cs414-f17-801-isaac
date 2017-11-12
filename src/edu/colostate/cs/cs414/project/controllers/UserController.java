@@ -1,6 +1,8 @@
 
 package edu.colostate.cs.cs414.project.controllers;
 
+import java.util.List;
+
 import edu.colostate.cs.cs414.project.models.Customer;
 import edu.colostate.cs.cs414.project.models.Response;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -11,7 +13,7 @@ public class UserController {
 	
 	private static final UserController instance = new UserController();
 	
-	IPersistenceService dao = new HibernatePersistenceService();
+	IPersistenceService dao = HibernatePersistenceService.getInstance();
 	
 	private UserController(){}
 	
@@ -55,6 +57,18 @@ public class UserController {
 		}
 		
 		return response;
+	}
+	
+	public List<Trainer> getTrainers(){
+		
+		return dao.getTrainers();
+		
+	}
+	
+	public List<Customer> getCustomers(){
+		
+		return dao.getCustomers();
+		
 	}
 
 	/*

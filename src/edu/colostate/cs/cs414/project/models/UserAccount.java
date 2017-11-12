@@ -82,6 +82,13 @@ public class UserAccount {
 		
 	}
 	
+	public void setPassword(String password){
+		
+		this.salt = SecurityUtility.getSalt();
+		
+		this.passwordHash = SecurityUtility.hashPassword(password.toCharArray(), this.salt, 256, 256);
+	}
+	
 	protected void fillEnumRoles(){
 		
 		this.roles = new HashSet<Enum_Role>();

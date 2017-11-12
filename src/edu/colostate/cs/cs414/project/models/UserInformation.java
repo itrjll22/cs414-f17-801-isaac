@@ -15,6 +15,10 @@ public class UserInformation {
 	@Id
 	private String id;
 	
+	private String firstName;
+	
+	private String lastName;
+	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	@JoinColumn(name = "trainer_id")
 	Trainer trainer;
@@ -47,9 +51,12 @@ public class UserInformation {
 		
 	}
 	
-	public UserInformation(Phone phone, Email email, Address address, HealthInsuranceProvider healthInsuranceProvider){
+	public UserInformation(String firstName, String lastName, Phone phone, Email email, Address address, HealthInsuranceProvider healthInsuranceProvider){
 		
 		this.id = java.util.UUID.randomUUID().toString();
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
 		
 		this.phone = phone;
 		this.email = email;
@@ -59,9 +66,12 @@ public class UserInformation {
 	}
 	
 	
-	public UserInformation(String id, Phone phone, Email email, Address address, HealthInsuranceProvider healthInsuranceProvider){
+	public UserInformation(String id, String firstName, String lastName, Phone phone, Email email, Address address, HealthInsuranceProvider healthInsuranceProvider){
 		
 		this.id = id;
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
 		
 		this.phone = phone;
 		this.email = email;
@@ -169,6 +179,22 @@ public class UserInformation {
 
 	public void setHealthInsuranceProvider(HealthInsuranceProvider healthInsuranceProvider) {
 		this.healthInsuranceProvider = healthInsuranceProvider;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }

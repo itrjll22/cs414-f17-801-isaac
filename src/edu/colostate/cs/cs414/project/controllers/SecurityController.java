@@ -22,7 +22,7 @@ public class SecurityController {
 
 	private static final SecurityController instance = new SecurityController();
 	
-	HibernatePersistenceService dao = new HibernatePersistenceService();
+	HibernatePersistenceService dao = HibernatePersistenceService.getInstance();
 	
 	private SecurityController(){
 		
@@ -32,6 +32,7 @@ public class SecurityController {
 			UserAccount ua = new UserAccount("itrjllManager", "password123");
 			
 			UserInformation userInfo = new UserInformation(
+					"Isaac", "Trujillo",
 					new Phone("555-555-5555", "mobile"),
 					new Email("isaac.trujillo@colostate.edu", "student"),
 					new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
@@ -45,6 +46,7 @@ public class SecurityController {
 			UserAccount uaTrainer = new UserAccount("itrjllTrainer", "123123123");
 			
 			UserInformation userInfoTrainer = new UserInformation(
+					"Isaactrainer", "Trujillo",
 					new Phone("555-555-5555", "mobile"),
 					new Email("itrjll22@outlook.com", "student"),
 					new Address("123 Another Place", "", "Rio Rancho", "NM", "87144"),

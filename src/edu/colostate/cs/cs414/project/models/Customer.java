@@ -25,6 +25,48 @@ public class Customer {
 			
 	}
 	
+	public Customer(String firstName, String lastName, String address1, String address2, String city, String state,
+			String zip, String phone, String email, String id, String healthInsuranceProvider, boolean isActive, 
+			String username, String password){
+		
+		UserAccount ua = new UserAccount(username, password);
+		
+		UserInformation userInfo = new UserInformation(
+				firstName, lastName,
+				new Phone(phone, ""),
+				new Email(email, ""),
+				new Address(address1, address2, city, state, zip),
+				new HealthInsuranceProvider(healthInsuranceProvider));
+		
+		this.userAccount = ua;
+		this.userInformation = userInfo;
+		
+		this.isActive = isActive;
+		
+		this.id = id;
+	}
+	
+	public Customer(String firstName, String lastName, String address1, String address2, String city, String state,
+			String zip, String phone, String email, String id, HealthInsuranceProvider healthInsuranceProvider, boolean isActive, 
+			String username, String password){
+		
+		UserAccount ua = new UserAccount(username, password);
+		
+		UserInformation userInfo = new UserInformation(
+				firstName, lastName,
+				new Phone(phone, ""),
+				new Email(email, ""),
+				new Address(address1, address2, city, state, zip),
+				healthInsuranceProvider);
+		
+		this.userAccount = ua;
+		this.userInformation = userInfo;
+		
+		this.isActive = isActive;
+		
+		this.id = id;
+	}
+	
 	public Customer(UserAccount userAccount, UserInformation userInformation){
 		
 		this.id = java.util.UUID.randomUUID().toString();

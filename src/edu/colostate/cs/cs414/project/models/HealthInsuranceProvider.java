@@ -1,11 +1,14 @@
 package edu.colostate.cs.cs414.project.models;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class HealthInsuranceProvider {
@@ -17,6 +20,8 @@ public class HealthInsuranceProvider {
 	@JoinColumn(name = "userInformation_id")
 	private UserInformation userInformation;
 	
+	@Column(nullable = false, unique=true)
+	@NotBlank
 	private String name;
 	
 	public HealthInsuranceProvider(){
@@ -62,6 +67,11 @@ public class HealthInsuranceProvider {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 	
 }
