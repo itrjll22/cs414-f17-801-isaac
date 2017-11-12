@@ -128,4 +128,11 @@ public class Customer {
 	public void setUserInformation(UserInformation userInformation) {
 		this.userInformation = userInformation;
 	}
+
+	@Override
+	public String toString() {
+		return this.userInformation.getFirstName() + " " + this.userInformation.getLastName();
+	}
+	
+	
 }

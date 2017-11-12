@@ -41,4 +41,11 @@ public class EquipmentItem {
 	}
 	
 	public File getImageFile(){return this.imageFile;}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	
+	
 }

@@ -1,11 +1,14 @@
 package edu.colostate.cs.cs414.project.models;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -16,9 +19,9 @@ public class HealthInsuranceProvider {
 	@Id
 	private String id;
 	
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "healthInsuranceProvider", cascade = CascadeType.ALL)
-	@JoinColumn(name = "userInformation_id")
-	private UserInformation userInformation;
+	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//@JoinColumn(name = "userInformation_id")
+	//private List<UserInformation> userInformation;
 	
 	@Column(nullable = false, unique=true)
 	@NotBlank

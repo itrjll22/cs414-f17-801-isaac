@@ -152,6 +152,16 @@ public class UI {
 	private JButton btnModifyTrainer;
 	
 	private Trainer selectedTrainer;
+	private Customer selectedCustomer;
+	private EquipmentItem selectedEquipmentItem;
+	
+	private JPanel panelSelectCustomer;
+	private JLabel lblPleaseSelectA_1;
+	private JScrollPane scrollPane_3;
+	private JButton button_1;
+	private JList list_3;
+	private JButton btnSaveChanges;
+	private JTextField tbHiddenCustomerGUID;
 	
 	/**
 	 * Launch the application.
@@ -195,17 +205,25 @@ public class UI {
 	
 	static void clearAllTextBoxes(JFrame container) {
 	    for (Component c : container.getContentPane().getComponents()) {
-	    	if (c instanceof JTextField)
-            {
-                JTextField j = (JTextField)c;
-                j.setText("");
-            }
 	    	
-	    	else if (c instanceof JPasswordField)
-            {
-	    		JPasswordField j = (JPasswordField)c;
-                j.setText("");
-            }
+	    	if (c instanceof Container){
+	    		
+	    		for(Component inner : ((Container) c).getComponents()){
+	    	
+			    	if (inner instanceof JTextField)
+		            {
+		                JTextField j = (JTextField)inner;
+		                j.setText("");
+		                //System.out.println("Cleared Text for: " + j.getName());
+		            }
+			    	
+			    	else if (inner instanceof JPasswordField)
+		            {
+			    		JPasswordField j = (JPasswordField)inner;
+		                j.setText("");
+		            }
+	    		}
+	    	}
 	    }
 	}
 	
@@ -302,6 +320,11 @@ public class UI {
 		btnHireTrainer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
+				btnCreate.setVisible(true);
+				btnModifyTrainer.setVisible(false);
+				
+				textField_11.setEnabled(true);
+				
 				healthInsuranceProviders.clear();
 				
 				for(HealthInsuranceProvider provider : SystemGeneralController.getInstance().getHealthInsuranceProviders()){
@@ -330,6 +353,9 @@ public class UI {
 		JButton btnNewButton_1 = new JButton("Register Customer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				button.setVisible(true);
+				btnSaveChanges.setVisible(false);
 				
 				healthInsuranceProviders.clear();
 			
@@ -376,6 +402,26 @@ public class UI {
 		panelManagerDashboard.add(btnNewButton_2);
 		
 		btnNewButton_3 = new JButton("Modify Customer");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				customers.clear();
+				
+				for(Customer customer : UserController.getInstance().getCustomers()){
+					customers.addElement(customer);
+				}
+				
+				
+				 list_3.setModel(customers);     
+				 scrollPane_3.getViewport().removeAll();
+				 scrollPane_3.setViewportView(list_3);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+					
+				panelSelectCustomer.setVisible(true);
+				
+			}
+		});
 		btnNewButton_3.setBounds(141, 189, 199, 25);
 		panelManagerDashboard.add(btnNewButton_3);
 		
@@ -565,9 +611,6 @@ public class UI {
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				btnCreate.setVisible(true);
-				btnModifyTrainer.setVisible(false);
-				
 				HealthInsuranceProvider selectedProvider = (HealthInsuranceProvider) list_1.getSelectedValue();
 				
 				Response response = null;
@@ -720,8 +763,13 @@ public class UI {
 				selectedTrainer.getUserInformation().getPhone().setNumber(textField_8.getText());
 				selectedTrainer.getUserInformation().getEmail().setEmail(textField_10.getText());
 				
-				HealthInsuranceProvider selectedProvider = (HealthInsuranceProvider) list.getSelectedValue();
-				selectedTrainer.getUserInformation().setHealthInsuranceProvider(selectedProvider);
+				HealthInsuranceProvider selectedProvider = (HealthInsuranceProvider) list_1.getSelectedValue();
+				
+				if(selectedProvider != null){
+					selectedTrainer.getUserInformation().setHealthInsuranceProvider(selectedProvider);
+				}else{
+					selectedTrainer.getUserInformation().setHealthInsuranceProvider(new HealthInsuranceProvider(textField_13.getText()));
+				}
 				
 				selectedTrainer.setWorkHours(textField_12.getText());
 				selectedTrainer.setQualifications(textField_15.getText());
@@ -1012,6 +1060,82 @@ public class UI {
 		lblOr.setBounds(289, 440, 28, 15);
 		panelRegisterCustomer.add(lblOr);
 		
+		btnSaveChanges = new JButton("Save Changes");
+		btnSaveChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				selectedCustomer.getUserInformation().setFirstName(textField_17.getText());
+				selectedCustomer.getUserInformation().setLastName(textField_18.getText());
+				selectedCustomer.getUserInformation().getAddress().setAddressLine1(textField_19.getText());
+				selectedCustomer.getUserInformation().getAddress().setAddressLine2(textField_20.getText());
+				selectedCustomer.getUserInformation().getAddress().setCity(textField_21.getText());
+				selectedCustomer.getUserInformation().getAddress().setState(textField_22.getText());
+				selectedCustomer.getUserInformation().getAddress().setZip(textField_23.getText());
+				selectedCustomer.getUserInformation().getPhone().setNumber(textField_24.getText());
+				selectedCustomer.getUserInformation().getEmail().setEmail(textField_25.getText());
+				
+				HealthInsuranceProvider selectedProvider = (HealthInsuranceProvider) list.getSelectedValue();
+				
+				if(selectedProvider != null){
+					selectedCustomer.getUserInformation().setHealthInsuranceProvider(selectedProvider);
+				}else{
+					selectedCustomer.getUserInformation().setHealthInsuranceProvider(new HealthInsuranceProvider(textField_27.getText()));
+				}
+				
+				selectedCustomer.setActive(chckbxActive.isSelected());
+				
+				selectedCustomer.getUserAccount().setUsername(textField_28.getText());
+				
+				if(!passwordField.getText().isEmpty()){
+					selectedCustomer.getUserAccount().setPassword(passwordField.getText());
+				}
+				/*textField_10.getText(),
+				textField_11.getText(),
+				selectedProvider,
+				textField_12.getText(),
+				textField_15.getText(),
+				textField_14.getText(),
+				textField_16.getText()
+				*/
+				
+				Response response = UserController.getInstance()
+						.registerCustomer(selectedCustomer);
+			
+				
+			
+			
+			if(response.isSuccess)
+			{
+				clearAllTextBoxes(frame);
+				
+				lblNewLabel_1.setText(response.StatusText);
+				
+				final Timer timer = new Timer(1000, null);
+		        timer.addActionListener((al) -> {
+		            
+		        	setComponentVisibility(frame, JPanel.class, false);
+		        	
+		        	panelManagerDashboard.setVisible(true);
+		        	
+		        	timer.stop();
+		        	
+		        });
+		        timer.start();
+			}else{
+				lblNewLabel.setText(response.StatusText);
+			}
+				
+			}
+		});
+		btnSaveChanges.setBounds(187, 602, 143, 25);
+		panelRegisterCustomer.add(btnSaveChanges);
+		
+		tbHiddenCustomerGUID = new JTextField();
+		tbHiddenCustomerGUID.setBounds(47, 592, 4, 19);
+		panelRegisterCustomer.add(tbHiddenCustomerGUID);
+		tbHiddenCustomerGUID.setColumns(10);
+		tbHiddenCustomerGUID.setVisible(false);
+		
 		panelEquipmentInventory = new JPanel();
 		panelEquipmentInventory.setLayout(null);
 		frame.getContentPane().add(panelEquipmentInventory, "name_17612827201978");
@@ -1189,6 +1313,77 @@ public class UI {
 		});
 		btnNewButton_5.setBounds(170, 398, 177, 25);
 		panelSelectTrainer.add(btnNewButton_5);
+		
+		panelSelectCustomer = new JPanel();
+		panelSelectCustomer.setLayout(null);
+		frame.getContentPane().add(panelSelectCustomer, "name_36366460619016");
+		
+		lblPleaseSelectA_1 = new JLabel("Please Select a Customer");
+		lblPleaseSelectA_1.setBounds(170, 5, 244, 15);
+		panelSelectCustomer.add(lblPleaseSelectA_1);
+		
+		scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(49, 83, 412, 303);
+		panelSelectCustomer.add(scrollPane_3);
+		
+		list_3 = new JList();
+		scrollPane_3.setViewportView(list_3);
+		
+		button_1 = new JButton("Modify");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				healthInsuranceProviders.clear();
+				
+				for(HealthInsuranceProvider provider : SystemGeneralController.getInstance().getHealthInsuranceProviders()){
+					healthInsuranceProviders.addElement(provider);
+				
+				}
+				
+				 list.setModel(healthInsuranceProviders);     
+				 scrollPane.getViewport().removeAll();
+				 scrollPane.setViewportView(list);
+				
+				 
+				selectedCustomer = (Customer) list_3.getSelectedValue();
+				
+				tbHiddenCustomerGUID.setText(selectedCustomer.getId());
+				
+				button.setVisible(false);
+				btnSaveChanges.setVisible(true);
+				//btnCreate.setText("Save changes.");
+				
+				
+				textField_17.setText(selectedCustomer.getUserInformation().getFirstName());
+				textField_18.setText(selectedCustomer.getUserInformation().getLastName());
+				
+				textField_19.setText(selectedCustomer.getUserInformation().getAddress().getAddressLine1());
+				textField_20.setText(selectedCustomer.getUserInformation().getAddress().getAddressLine2());
+				textField_21.setText(selectedCustomer.getUserInformation().getAddress().getCity());
+				textField_22.setText(selectedCustomer.getUserInformation().getAddress().getState());
+				textField_23.setText(selectedCustomer.getUserInformation().getAddress().getZip());
+				
+				textField_24.setText(selectedCustomer.getUserInformation().getPhone().getNumber());
+				textField_25.setText(selectedCustomer.getUserInformation().getEmail().getEmail());
+				textField_26.setText(selectedCustomer.getId());
+				textField_26.setEnabled(false);
+				
+				list.setSelectedIndex(healthInsuranceProviders.indexOf(selectedCustomer.getUserInformation().getHealthInsuranceProvider()));
+				
+				chckbxActive.setSelected(selectedCustomer.isActive());
+				
+				textField_28.setText(selectedCustomer.getUserAccount().getUsername());
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelRegisterCustomer.setVisible(true);
+				
+				
+				
+			}
+		});
+		button_1.setBounds(170, 398, 177, 25);
+		panelSelectCustomer.add(button_1);
 		
 		
 		
