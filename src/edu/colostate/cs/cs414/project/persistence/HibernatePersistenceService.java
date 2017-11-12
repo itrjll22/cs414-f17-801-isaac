@@ -6,6 +6,9 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -227,12 +230,15 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		List<EquipmentItem> equipmentItems = new ArrayList<EquipmentItem>();
 		
-		try{
-			Query query = session.createQuery("from EquipmentItem");
-			equipmentItems = query.list();
-		}catch(Exception e){
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
 
-		}
+		CriteriaQuery<EquipmentItem> criteria = builder.createQuery(EquipmentItem.class);
+		
+		criteria.from(EquipmentItem.class);
+		
+		equipmentItems = session.createQuery(criteria).getResultList();
+		
 		
 		return equipmentItems;
 	}

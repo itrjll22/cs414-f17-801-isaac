@@ -162,6 +162,11 @@ public class UI {
 	private JList list_3;
 	private JButton btnSaveChanges;
 	private JTextField tbHiddenCustomerGUID;
+	private JPanel panelSelectEquipmentItem;
+	private JLabel lblPleaseSelectAn;
+	private JScrollPane scrollPane_4;
+	private JButton button_2;
+	private JTextField tbHiddenEquipmentItemGUID;
 	
 	/**
 	 * Launch the application.
@@ -232,10 +237,16 @@ public class UI {
     	//return new ImageIcon(ImagePath);
     	
         ImageIcon MyImage = new ImageIcon(ImagePath);
-        Image img = MyImage.getImage();
-        Image newImg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon image = new ImageIcon(newImg);
-        return image;
+       return resizeImageIcon(MyImage, label);
+    }
+    
+    public ImageIcon resizeImageIcon(ImageIcon MyImage, JLabel label){
+    	
+    	 Image img = MyImage.getImage();
+         Image newImg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+         ImageIcon image = new ImageIcon(newImg);
+         return image;
+    	
     }
 	
 	/**
@@ -429,6 +440,8 @@ public class UI {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				label_14.setText("");
+				
 				setComponentVisibility(frame, JPanel.class, false);
 				
 				panelEquipmentInventory.setVisible(true);
@@ -439,9 +452,11 @@ public class UI {
 		btnNewButton_4.setBounds(141, 249, 261, 25);
 		panelManagerDashboard.add(btnNewButton_4);
 		
-		btnModifyEquipmentInventory = new JButton("Modify Equipment Inventory");
-		btnModifyEquipmentInventory.setBounds(141, 290, 261, 25);
-		panelManagerDashboard.add(btnModifyEquipmentInventory);
+		
+		
+		
+		
+		
 		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1151,7 +1166,7 @@ public class UI {
 		panelEquipmentInventory.add(lblName);
 		
 		lblEquipmentInventory = new JLabel("Equipment Inventory");
-		lblEquipmentInventory.setBounds(190, 12, 131, 15);
+		lblEquipmentInventory.setBounds(190, 12, 220, 15);
 		panelEquipmentInventory.add(lblEquipmentInventory);
 		
 		lblQuantity = new JLabel("Quantity:");
@@ -1243,6 +1258,56 @@ public class UI {
 		label_14 = new JLabel("");
 		label_14.setBounds(88, 586, 354, 15);
 		panelEquipmentInventory.add(label_14);
+		
+		JButton btnSaveEquipmentItemChanges = new JButton("Save Changes");
+		btnSaveEquipmentItemChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				selectedEquipmentItem.setName(textField_29.getText());
+				selectedEquipmentItem.setQuantity(Integer.parseInt(textField_30.getText()));
+				
+				if(fc.getSelectedFile() != null){
+					selectedEquipmentItem.setImageFile(fc.getSelectedFile());
+				}
+				
+				
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				Response response = workoutController.addEquipmentItem(selectedEquipmentItem);
+				
+
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					label_14.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelManagerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					label_14.setText(response.StatusText);
+				}
+				
+			}
+		});
+		btnSaveEquipmentItemChanges.setBounds(160, 549, 197, 25);
+		panelEquipmentInventory.add(btnSaveEquipmentItemChanges);
+		
+		tbHiddenEquipmentItemGUID = new JTextField();
+		tbHiddenEquipmentItemGUID.setBounds(26, 522, 16, 19);
+		panelEquipmentInventory.add(tbHiddenEquipmentItemGUID);
+		tbHiddenEquipmentItemGUID.setColumns(10);
+		tbHiddenEquipmentItemGUID.setVisible(false);
 		
 		panelSelectTrainer = new JPanel();
 		frame.getContentPane().add(panelSelectTrainer, "name_22839733580412");
@@ -1385,9 +1450,83 @@ public class UI {
 		button_1.setBounds(170, 398, 177, 25);
 		panelSelectCustomer.add(button_1);
 		
+
+		panelSelectEquipmentItem = new JPanel();
+		panelSelectEquipmentItem.setLayout(null);
+		frame.getContentPane().add(panelSelectEquipmentItem, "name_1164882857818");
+		
+		scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(49, 83, 412, 303);
+		panelSelectEquipmentItem.add(scrollPane_4);
+		
+		JList list_4 = new JList();
+		scrollPane_4.setViewportView(list_4);
 		
 		
-	
+		
+		lblPleaseSelectAn = new JLabel("Please Select an Equipment Item");
+		lblPleaseSelectAn.setBounds(170, 5, 244, 15);
+		panelSelectEquipmentItem.add(lblPleaseSelectAn);
+		
+		
+		
+		button_2 = new JButton("Modify");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				label_14.setText("");
+				
+				selectedEquipmentItem = (EquipmentItem) list_4.getSelectedValue();
+				
+				tbHiddenEquipmentItemGUID.setText(selectedEquipmentItem.getId());
+				
+				btnSaveEquipmentItem.setVisible(false);
+				btnSaveEquipmentItemChanges.setVisible(true);
+				
+				textField_29.setText(selectedEquipmentItem.getName());
+				textField_30.setText(String.valueOf(selectedEquipmentItem.getQuantity()));
+				
+				lbl_picture.setIcon(resizeImageIcon(selectedEquipmentItem.getImageIcon(), lbl_picture));
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelEquipmentInventory.setVisible(true);
+				
+				
+				
+				
+			}
+		});
+		button_2.setBounds(170, 398, 177, 25);
+		panelSelectEquipmentItem.add(button_2);
+		
+		
+		
+		btnModifyEquipmentInventory = new JButton("Modify Equipment Inventory");
+		btnModifyEquipmentInventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				equipmentItems.clear();
+				
+				for(EquipmentItem equipmentItem: workoutController.getEquipmentItems()){
+					equipmentItems.addElement(equipmentItem);
+				}
+				
+				
+				 list_4.setModel(equipmentItems);     
+				 scrollPane_4.getViewport().removeAll();
+				 scrollPane_4.setViewportView(list_4);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+					
+				panelSelectEquipmentItem.setVisible(true);
+				
+			}
+		});
+		btnModifyEquipmentInventory.setBounds(141, 290, 261, 25);
+		panelManagerDashboard.add(btnModifyEquipmentInventory);
 		
 		
 		    
