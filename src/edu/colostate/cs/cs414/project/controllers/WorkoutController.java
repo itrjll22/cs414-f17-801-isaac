@@ -1,6 +1,7 @@
 package edu.colostate.cs.cs414.project.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import edu.colostate.cs.cs414.project.models.Address;
 import edu.colostate.cs.cs414.project.models.Customer;
@@ -85,6 +86,22 @@ public class WorkoutController {
 		if(dao.addWorkoutRoutine(workoutRoutine)){
 			response.isSuccess = true;
 			response.StatusText = "Add WorkoutRoutine success!";
+		}
+		
+		return response;
+		
+	}
+	
+	public Response assignWorkoutRoutines(Customer customer, Set<WorkoutRoutine> workoutRoutines){
+		
+		Response response = new Response();
+		response.StatusText = "Add assignWorkoutRoutines unsuccessful.";
+		
+		customer.setWorkoutRoutines(workoutRoutines);
+		
+		if(dao.addCustomer(customer)){
+			response.isSuccess = true;
+			response.StatusText = "Add assignWorkoutRoutines success!";
 		}
 		
 		return response;

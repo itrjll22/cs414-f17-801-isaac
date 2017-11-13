@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import edu.colostate.cs.cs414.project.controllers.SecurityController;
 import edu.colostate.cs.cs414.project.controllers.SystemGeneralController;
@@ -199,6 +201,13 @@ public class UI {
 	private JLabel lblPleaseSelectA_2;
 	private JButton button_5;
 	private JList list_9;
+	private JPanel panelAssignWorkouts;
+	private JLabel lblPleaseSelect;
+	private JScrollPane scrollPane_10;
+	private JButton btnAssign;
+	private JLabel lblPleaseSelect_1;
+	private JLabel lblAssignWorkouts;
+	private JLabel lblAssignStatus;
 	
 	/**
 	 * Launch the application.
@@ -512,9 +521,7 @@ public class UI {
 		
 		
 		
-		JButton btnAssignWorkoutRoutine = new JButton("Assign Workout Routine");
-		btnAssignWorkoutRoutine.setBounds(98, 294, 296, 25);
-		panelTrainerDashboard.add(btnAssignWorkoutRoutine);
+		
 		
 		panelSelectExercise = new JPanel();
 		panelSelectExercise.setLayout(null);
@@ -2179,6 +2186,154 @@ public class UI {
 		});
 		btnModifyWorkoutRoutine.setBounds(98, 232, 296, 25);
 		panelTrainerDashboard.add(btnModifyWorkoutRoutine);
+		
+		panelAssignWorkouts = new JPanel();
+		panelAssignWorkouts.setLayout(null);
+		frame.getContentPane().add(panelAssignWorkouts, "name_16550629449094");
+		
+		lblPleaseSelect = new JLabel("1. Please Select a Customer");
+		lblPleaseSelect.setBounds(49, 56, 244, 15);
+		panelAssignWorkouts.add(lblPleaseSelect);
+		
+		scrollPane_10 = new JScrollPane();
+		scrollPane_10.setBounds(49, 83, 412, 195);
+		panelAssignWorkouts.add(scrollPane_10);
+		
+		JList list_10 = new JList();
+		scrollPane_10.setViewportView(list_10);
+		
+		
+		
+		JScrollPane scrollPane_11 = new JScrollPane();
+		scrollPane_11.setBounds(49, 312, 412, 195);
+		panelAssignWorkouts.add(scrollPane_11);
+		
+		JList list_11 = new JList();
+		scrollPane_11.setViewportView(list_11);
+		
+		lblPleaseSelect_1 = new JLabel("2. Please Select Workout Routines");
+		lblPleaseSelect_1.setBounds(49, 285, 380, 15);
+		panelAssignWorkouts.add(lblPleaseSelect_1);
+		
+		lblAssignWorkouts = new JLabel("Assign Workouts");
+		lblAssignWorkouts.setBounds(185, 12, 244, 15);
+		panelAssignWorkouts.add(lblAssignWorkouts);
+		
+		JButton btnAssignWorkoutRoutine = new JButton("Assign Workout Routine");
+		btnAssignWorkoutRoutine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				customers.clear();
+				workoutRoutines.clear();
+				
+				lblAssignStatus.setText("");
+				
+				for(Customer customer : UserController.getInstance().getCustomers()){
+					customers.addElement(customer);
+				}
+				
+				
+				 list_10.setModel(customers);     
+				 scrollPane_10.getViewport().removeAll();
+				 scrollPane_10.setViewportView(list_10);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+					
+				panelAssignWorkouts.setVisible(true);
+			
+			}
+		});
+		btnAssignWorkoutRoutine.setBounds(98, 294, 296, 25);
+		panelTrainerDashboard.add(btnAssignWorkoutRoutine);
+		
+		list_10.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				selectedCustomer = (Customer)list_10.getSelectedValue();
+				
+				if(selectedCustomer != null){
+				
+					WorkoutController workoutController = new WorkoutController();
+					
+					workoutRoutines.clear();
+					
+					for(WorkoutRoutine workoutRoutine: workoutController.getWorkoutRoutines()){
+						workoutRoutines.addElement(workoutRoutine);
+					}
+					
+					 list_11.setModel(workoutRoutines);     
+					 scrollPane_11.getViewport().removeAll();
+					 scrollPane_11.setViewportView(list_11);
+					 
+					 list_11.setSelectionMode(
+			                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+					
+					 List<Integer> indices = new ArrayList<Integer>();
+					 
+					 for(WorkoutRoutine wr : selectedCustomer.getWorkoutRoutines()){
+						 indices.add(workoutRoutines.indexOf(wr));
+					 }
+					 
+					 int[] array = indices.stream().mapToInt(i->i).toArray();
+					 list_11.setSelectedIndices(array);
+				 
+				}
+				
+			}
+
+           
+        });
+		
+		lblAssignStatus = new JLabel("");
+		lblAssignStatus.setBounds(49, 600, 394, 15);
+		panelAssignWorkouts.add(lblAssignStatus);
+		
+		btnAssign = new JButton("Assign");
+		btnAssign.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				selectedCustomer = (Customer)list_10.getSelectedValue();
+				
+				
+				
+				WorkoutController wc = new WorkoutController();
+
+				List<WorkoutRoutine> selectedWorkoutRoutines =  list_11.getSelectedValuesList();
+				
+				Response response = null;
+				
+				response = wc.assignWorkoutRoutines(selectedCustomer, new HashSet<WorkoutRoutine>(selectedWorkoutRoutines));
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					lblAssignStatus.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					lblAssignStatus.setText(response.StatusText);
+				}
+				
+				
+			}
+		});
+		btnAssign.setBounds(170, 545, 177, 25);
+		panelAssignWorkouts.add(btnAssign);
+		
+		
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			
