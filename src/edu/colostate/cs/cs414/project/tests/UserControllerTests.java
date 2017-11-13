@@ -2,6 +2,7 @@ package edu.colostate.cs.cs414.project.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,8 @@ public class UserControllerTests {
 		dao = HibernatePersistenceService.getInstance();
 		
 	}
+	
+
 	
 	@Test
 	public void testAddTrainer() {
@@ -56,40 +59,35 @@ public class UserControllerTests {
 		}
 	}
 	
-		/*
+		
 	@Test
 	public void testModifyTrainer() {
 		
-		UserAccount ua = new UserAccount("RandomUsername", "password123");
+		List<Trainer> trainers = UserController.getInstance().getTrainers();
+ 	
+		Trainer t1 = trainers.get(0);
+		t1.getUserInformation().setFirstName("asdfasdfasdfasdf");
 		
-		UserInformation userInfo = new UserInformation(
-				new Phone("555-555-5555", "mobile"),
-				new Email("randomuser@randomdomain.com", "personal"),
-				new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
-				new HealthInsuranceProvider("Blue Cross Blue Shield"));
-				
+		String t1Id = t1.getId();
 		
-		Trainer trainer = new Trainer(ua, userInfo);
+		assertEquals(userController.modifyTrainer(t1).isSuccess, true);
 		
-		assertEquals(true, userController.hireTrainer(trainer).isSuccess);
+		trainers = UserController.getInstance().getTrainers();
 		
-		Trainer t = dao.getTrainer(trainer.getId());
+		Trainer modifiedTrainer = null;
 		
-		UserInformation updatedInfo = new UserInformation(
-				new Phone("555-777-7777", "mobile"),
-				new Email("randomuser@randomdomain.com", "personal"),
-				new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
-				new HealthInsuranceProvider("Blue Cross Blue Shield"));
+		for(Trainer t : trainers){
+			if(t.getId().equalsIgnoreCase(t1Id)){
+				modifiedTrainer = t;
+			}
+		}
 		
-		t.setUserInformation(updatedInfo);
+		assertEquals(modifiedTrainer != null, true);
 		
-		dao.editTrainer(t);
+		assertEquals(modifiedTrainer.getUserInformation().getFirstName().equalsIgnoreCase("asdfasdfasdfasdf"), true);
 		
-		t = dao.getTrainer(trainer.getId());
-		
-		assertEquals(t.getUserInformation().getPhone().getNumber(), "555-777-7777");
 	}
-	*/
+	
 		
 	@Test
 	public void testAddCustomer() {

@@ -31,6 +31,22 @@ public class HealthInsuranceProvider {
 		
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public HealthInsuranceProvider(String name){
 		this.id = java.util.UUID.randomUUID().toString();
 		this.name = name;

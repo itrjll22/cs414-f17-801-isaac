@@ -84,13 +84,5 @@ public class SecurityController {
 		return response;
 	}
 	
-	public Response createUserAccount(String username, String password, Set<Enum_Role> roles){
-		
-		Response response = new Response();
-		
-		UserAccount userAccount = new UserAccount(username, password, roles);
-		
-		return response;
-	}
 	
 }
