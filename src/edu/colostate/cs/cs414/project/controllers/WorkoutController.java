@@ -1,5 +1,6 @@
 package edu.colostate.cs.cs414.project.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import edu.colostate.cs.cs414.project.models.EquipmentItem;
 import edu.colostate.cs.cs414.project.models.Exercise;
 import edu.colostate.cs.cs414.project.models.ExerciseSet;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
+import edu.colostate.cs.cs414.project.models.ISearchable;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Phone;
 import edu.colostate.cs.cs414.project.models.Response;
@@ -130,6 +132,35 @@ public class WorkoutController {
 		
 		return dao.getWorkoutRoutines();
 		
+	}
+	
+	public List<Customer> seachCustomers(String searchTerm){
+		
+		return dao.searchCustomers(searchTerm);
+		
+		
+	}
+	
+	public List<WorkoutRoutine> searchWorkoutRoutines(String searchTerm){
+		
+		return dao.searchWorkoutRoutines(searchTerm);
+		
+		
+	}
+	
+	public List<Customer> getCustomersAssignedWorkoutRoutine(WorkoutRoutine workoutRoutine){
+		
+		List<Customer> customers = dao.getCustomers();
+		
+		List<Customer> matches = new ArrayList<Customer>();
+		
+		for(Customer c : customers){
+			if(c.getWorkoutRoutines().contains(workoutRoutine)){
+				matches.add(c);
+			}
+		}
+		
+		return matches;
 	}
 	
 }

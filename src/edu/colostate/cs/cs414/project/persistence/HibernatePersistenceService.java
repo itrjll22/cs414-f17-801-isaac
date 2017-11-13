@@ -8,10 +8,15 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 
@@ -23,6 +28,7 @@ import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
 import edu.colostate.cs.cs414.project.models.UserAccount;
+import edu.colostate.cs.cs414.project.models.UserInformation;
 import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 
 public class HibernatePersistenceService implements IPersistenceService{
@@ -361,6 +367,38 @@ public class HibernatePersistenceService implements IPersistenceService{
 		criteria.from(WorkoutRoutine.class);
 		
 		workoutRoutines = session.createQuery(criteria).getResultList();
+		
+		session.close();
+		
+		return workoutRoutines;
+	}
+	
+	public List<Customer> searchCustomers(String searchTerm){
+		
+		Session session = sessionFactory.openSession();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+		Query query = session.createQuery("select c from Customer c join c.userInformation userInfo"
+				+ " where userInfo.firstName like :searchTerm OR userInfo.lastName like :searchTerm");
+		
+		List<Customer> customers = query.setParameter("searchTerm", "%" + searchTerm + "%").list();
+		
+		session.close();
+		
+		return customers;
+	}
+	
+	public List<WorkoutRoutine> searchWorkoutRoutines(String searchTerm){
+		
+		Session session = sessionFactory.openSession();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+		Query query = session.createQuery("from WorkoutRoutine wr"
+				+ " where wr.name like :searchTerm");
+		
+		List<WorkoutRoutine> workoutRoutines = query.setParameter("searchTerm", "%" + searchTerm + "%").list();
 		
 		session.close();
 		

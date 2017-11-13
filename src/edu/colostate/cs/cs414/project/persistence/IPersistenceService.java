@@ -47,4 +47,8 @@ public interface IPersistenceService {
 	public boolean addWorkoutRoutine(WorkoutRoutine workoutRoutine);
 	
 	public List<WorkoutRoutine> getWorkoutRoutines();
+	
+	public List<Customer> searchCustomers(String searchTerm);
+	
+	public List<WorkoutRoutine> searchWorkoutRoutines(String searchTerm);
 }

@@ -7,10 +7,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class WorkoutRoutine {
+public class WorkoutRoutine implements ISearchable {
 	
 	@Id
 	private String id;
@@ -19,6 +21,8 @@ public class WorkoutRoutine {
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Exercise> exercises;
+	
+	
 	
 	public WorkoutRoutine(){
 		
@@ -61,6 +65,7 @@ public class WorkoutRoutine {
 	public String toString() {
 		return  name;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -97,6 +102,18 @@ public class WorkoutRoutine {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String getSearchCriteria() {
+		// TODO Auto-generated method stub
+		return "name";
+	}
+
+	@Override
+	public String getTableName() {
+		// TODO Auto-generated method stub
+		return "WorkoutRoutine";
 	}
 	
 }

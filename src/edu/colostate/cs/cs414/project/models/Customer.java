@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Customer {
+public class Customer implements ISearchable {
 	
 	@Id
 	private String id;
@@ -23,6 +23,8 @@ public class Customer {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private UserInformation userInformation;
+
+	
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<WorkoutRoutine> workoutRoutines;
@@ -149,6 +151,63 @@ public class Customer {
 	public String toString() {
 		return this.userInformation.getFirstName() + " " + this.userInformation.getLastName();
 	}
+
+	@Override
+	public String getSearchCriteria() {
+		// TODO Auto-generated method stub
+		return "name";
+	}
+
+	@Override
+	public String getTableName() {
+		// TODO Auto-generated method stub
+		return "Customer";
+	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
+		result = prime * result + ((userAccount == null) ? 0 : userAccount.hashCode());
+		result = prime * result + ((userInformation == null) ? 0 : userInformation.hashCode());
+		result = prime * result + ((workoutRoutines == null) ? 0 : workoutRoutines.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (isActive != other.isActive)
+			return false;
+		if (userAccount == null) {
+			if (other.userAccount != null)
+				return false;
+		} else if (!userAccount.equals(other.userAccount))
+			return false;
+		if (userInformation == null) {
+			if (other.userInformation != null)
+				return false;
+		} else if (!userInformation.equals(other.userInformation))
+			return false;
+		if (workoutRoutines == null) {
+			if (other.workoutRoutines != null)
+				return false;
+		} else if (!workoutRoutines.equals(other.workoutRoutines))
+			return false;
+		return true;
+	}
 	
 }

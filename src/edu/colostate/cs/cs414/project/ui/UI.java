@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -56,6 +58,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import javax.swing.JTextArea;
 
 public class UI {
 
@@ -166,6 +169,8 @@ public class UI {
 	private Exercise selectedExercise;
 	private WorkoutRoutine selectedWorkoutRoutine;
 	
+	//private Customer searchedCustomer; 
+	
 	private JPanel panelSelectCustomer;
 	private JLabel lblPleaseSelectA_1;
 	private JScrollPane scrollPane_3;
@@ -208,6 +213,24 @@ public class UI {
 	private JLabel lblPleaseSelect_1;
 	private JLabel lblAssignWorkouts;
 	private JLabel lblAssignStatus;
+	private JButton btnSearchCustomers;
+	private JButton btnSearchWorkoutroutines;
+	private JPanel panelSearchCustomers;
+	private JLabel lblSearchForA;
+	private JScrollPane scrollPane_12;
+	private JButton btnView;
+	private JTextField textField_36;
+	private JList list_12;
+	private JPanel panelSearchWorkoutRoutines;
+	private JLabel lblSearchForA_1;
+	private JScrollPane scrollPane_14;
+	private JLabel label_18;
+	private JTextField textField_37;
+	private JScrollPane scrollPane_15;
+	private JLabel lblAssignedToCustomers;
+	private JButton button_6;
+	private JList list_14;
+	private JList list_15;
 	
 	/**
 	 * Launch the application.
@@ -2246,6 +2269,31 @@ public class UI {
 		btnAssignWorkoutRoutine.setBounds(98, 294, 296, 25);
 		panelTrainerDashboard.add(btnAssignWorkoutRoutine);
 		
+		btnSearchCustomers = new JButton("Search Customers");
+		btnSearchCustomers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelSearchCustomers.setVisible(true);
+				
+			}
+		});
+		btnSearchCustomers.setBounds(98, 361, 296, 25);
+		panelTrainerDashboard.add(btnSearchCustomers);
+		
+		btnSearchWorkoutroutines = new JButton("Search Workout Routines");
+		btnSearchWorkoutroutines.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelSearchWorkoutRoutines.setVisible(true);
+			}
+		});
+		btnSearchWorkoutroutines.setBounds(98, 398, 296, 25);
+		panelTrainerDashboard.add(btnSearchWorkoutroutines);
+		
 		list_10.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -2333,7 +2381,221 @@ public class UI {
 		btnAssign.setBounds(170, 545, 177, 25);
 		panelAssignWorkouts.add(btnAssign);
 		
+		panelSearchCustomers = new JPanel();
+		panelSearchCustomers.setLayout(null);
+		frame.getContentPane().add(panelSearchCustomers, "name_21807554285630");
 		
+		lblSearchForA = new JLabel("Search for a Customer");
+		lblSearchForA.setBounds(170, 5, 244, 15);
+		panelSearchCustomers.add(lblSearchForA);
+		
+		scrollPane_12 = new JScrollPane();
+		scrollPane_12.setBounds(49, 83, 412, 303);
+		panelSearchCustomers.add(scrollPane_12);
+		
+		list_12 = new JList();
+		scrollPane_12.setViewportView(list_12);
+		
+		
+		
+		JLabel lblNewLabel_4 = new JLabel("Search:");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_4.setBounds(34, 48, 70, 15);
+		panelSearchCustomers.add(lblNewLabel_4);
+		
+		textField_36 = new JTextField();
+		textField_36.setBounds(105, 46, 356, 19);
+		panelSearchCustomers.add(textField_36);
+		textField_36.setColumns(10);
+		
+		JScrollPane scrollPane_13 = new JScrollPane();
+		scrollPane_13.setBounds(49, 463, 412, 147);
+		panelSearchCustomers.add(scrollPane_13);
+		
+		JList list_13 = new JList();
+		scrollPane_13.setViewportView(list_13);
+		
+		JLabel lblNewLabel_5 = new JLabel("Assigned Workouts");
+		lblNewLabel_5.setBounds(170, 436, 244, 15);
+		panelSearchCustomers.add(lblNewLabel_5);
+		
+		textField_36.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+			   
+				  
+				
+				  
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+			    
+				  String searchTerm = textField_36.getText();
+				  
+				  	WorkoutController wc = new WorkoutController();
+				  
+					customers.clear();
+					
+					for(Customer customer : wc.seachCustomers(searchTerm)){
+						customers.addElement(customer);
+					}
+					
+					
+					 list_12.setModel(customers);     
+					 scrollPane_12.getViewport().removeAll();
+					 scrollPane_12.setViewportView(list_12);
+				  
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+			    
+					String searchTerm = textField_36.getText();
+					  
+				  	WorkoutController wc = new WorkoutController();
+				  
+					customers.clear();
+					
+					for(Customer customer : wc.seachCustomers(searchTerm)){
+						customers.addElement(customer);
+					}
+					
+					
+					 list_12.setModel(customers);     
+					 scrollPane_12.getViewport().removeAll();
+					 scrollPane_12.setViewportView(list_12);
+				  
+			  }
+			  
+			  
+
+			});
+		
+		btnView = new JButton("View");
+		btnView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Customer searchedCustomer = (Customer)list_12.getSelectedValue();
+				
+				workoutRoutines.clear();
+				
+				for(WorkoutRoutine workoutRoutine : searchedCustomer.getWorkoutRoutines()){
+					workoutRoutines.addElement(workoutRoutine);
+				}
+				
+				
+				 list_13.setModel(workoutRoutines);     
+				 scrollPane_13.getViewport().removeAll();
+				 scrollPane_13.setViewportView(list_13);
+				 
+			}
+		});
+		btnView.setBounds(170, 398, 177, 25);
+		panelSearchCustomers.add(btnView);
+		
+		panelSearchWorkoutRoutines = new JPanel();
+		panelSearchWorkoutRoutines.setLayout(null);
+		frame.getContentPane().add(panelSearchWorkoutRoutines, "name_26379538324514");
+		
+		lblSearchForA_1 = new JLabel("Search for a Workout Routine");
+		lblSearchForA_1.setBounds(170, 5, 244, 15);
+		panelSearchWorkoutRoutines.add(lblSearchForA_1);
+		
+		scrollPane_14 = new JScrollPane();
+		scrollPane_14.setBounds(49, 83, 412, 303);
+		panelSearchWorkoutRoutines.add(scrollPane_14);
+		
+		list_14 = new JList();
+		scrollPane_14.setViewportView(list_14);
+		
+		label_18 = new JLabel("Search:");
+		label_18.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_18.setBounds(34, 48, 70, 15);
+		panelSearchWorkoutRoutines.add(label_18);
+		
+		textField_37 = new JTextField();
+		textField_37.setColumns(10);
+		textField_37.setBounds(105, 46, 356, 19);
+		panelSearchWorkoutRoutines.add(textField_37);
+		
+		scrollPane_15 = new JScrollPane();
+		scrollPane_15.setBounds(49, 463, 412, 147);
+		panelSearchWorkoutRoutines.add(scrollPane_15);
+		
+		list_15 = new JList();
+		scrollPane_15.setViewportView(list_15);
+		
+		lblAssignedToCustomers = new JLabel("Assigned To Customers");
+		lblAssignedToCustomers.setBounds(170, 436, 244, 15);
+		panelSearchWorkoutRoutines.add(lblAssignedToCustomers);
+		
+		button_6 = new JButton("View");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutRoutine workoutRoutine = (WorkoutRoutine)list_14.getSelectedValue();
+				
+				WorkoutController wc = new WorkoutController();
+				
+				customers.clear();
+				
+				for(Customer customer : wc.getCustomersAssignedWorkoutRoutine(workoutRoutine)){
+					customers.addElement(customer);
+				}
+				
+				
+				 list_15.setModel(customers);     
+				 scrollPane_15.getViewport().removeAll();
+				 scrollPane_15.setViewportView(list_15);
+				
+			}
+		});
+		button_6.setBounds(170, 398, 177, 25);
+		panelSearchWorkoutRoutines.add(button_6);
+		
+		textField_37.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+			   
+				  
+				
+				  
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+			    
+				  String searchTerm = textField_37.getText();
+				  
+				  	WorkoutController wc = new WorkoutController();
+				  
+					workoutRoutines.clear();
+					
+					for(WorkoutRoutine workoutRoutine : wc.searchWorkoutRoutines(searchTerm)){
+						workoutRoutines.addElement(workoutRoutine);
+					}
+					
+					
+					 list_14.setModel(workoutRoutines);     
+					 scrollPane_14.getViewport().removeAll();
+					 scrollPane_14.setViewportView(list_14);
+				  
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+			    
+				  String searchTerm = textField_37.getText();
+				  
+				  	WorkoutController wc = new WorkoutController();
+				  
+					workoutRoutines.clear();
+					
+					for(WorkoutRoutine workoutRoutine : wc.searchWorkoutRoutines(searchTerm)){
+						workoutRoutines.addElement(workoutRoutine);
+					}
+					
+					
+					 list_14.setModel(workoutRoutines);     
+					 scrollPane_14.getViewport().removeAll();
+					 scrollPane_14.setViewportView(list_14);
+				  
+			  }
+			  
+			  
+
+			});
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			
