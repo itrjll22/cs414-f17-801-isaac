@@ -5,6 +5,8 @@ import java.util.List;
 
 import edu.colostate.cs.cs414.project.models.Customer;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
+import edu.colostate.cs.cs414.project.models.Exercise;
+import edu.colostate.cs.cs414.project.models.ExerciseSet;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -33,4 +35,11 @@ public interface IPersistenceService {
 	
 	public List<EquipmentItem> getEquipmentItems();
 	
+	public List<ExerciseSet> getExerciseSets();
+	
+	public boolean addExerciseSet(ExerciseSet exerciseSet);
+	
+	public boolean addExercise(Exercise exercise);
+	
+	public List<Exercise> getExercises();
 }

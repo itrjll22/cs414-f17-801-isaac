@@ -8,6 +8,7 @@ import javax.swing.JPasswordField;
 
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
@@ -18,6 +19,8 @@ import edu.colostate.cs.cs414.project.controllers.WorkoutController;
 import edu.colostate.cs.cs414.project.models.Customer;
 import edu.colostate.cs.cs414.project.models.Enum_Role;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
+import edu.colostate.cs.cs414.project.models.Exercise;
+import edu.colostate.cs.cs414.project.models.ExerciseSet;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Response;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -33,6 +36,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -154,6 +160,7 @@ public class UI {
 	private Trainer selectedTrainer;
 	private Customer selectedCustomer;
 	private EquipmentItem selectedEquipmentItem;
+	private Exercise selectedExercise;
 	
 	private JPanel panelSelectCustomer;
 	private JLabel lblPleaseSelectA_1;
@@ -167,6 +174,19 @@ public class UI {
 	private JScrollPane scrollPane_4;
 	private JButton button_2;
 	private JTextField tbHiddenEquipmentItemGUID;
+	private JButton btnCreateExercise;
+	private JButton btnModifyExercise;
+	private JButton button_3;
+	private JPanel panelCreateExercise;
+	private JTextField textField_31;
+	private JTextField textField_32;
+	private JTextField textField_33;
+	private JTextField textField_34;
+	private JPanel panelSelectExercise;
+	private JLabel lblPleaseSelectAn_1;
+	private JScrollPane scrollPane_7;
+	private JButton button_4;
+	private JList list_7;
 	
 	/**
 	 * Launch the application.
@@ -326,6 +346,9 @@ public class UI {
 		
 		DefaultListModel<EquipmentItem> equipmentItems = new DefaultListModel<EquipmentItem>();
 		
+		DefaultListModel<ExerciseSet> exerciseSets = new DefaultListModel<ExerciseSet>();
+		
+		DefaultListModel<Exercise> exercises = new DefaultListModel<Exercise>();
 		
 		JButton btnHireTrainer = new JButton("Hire Trainer");
 		btnHireTrainer.addActionListener(new ActionListener() {
@@ -470,6 +493,64 @@ public class UI {
 		lblWelcomeTrainer = new JLabel("Welcome Trainer");
 		lblWelcomeTrainer.setBounds(155, 40, 146, 15);
 		panelTrainerDashboard.add(lblWelcomeTrainer);
+		
+		JButton btnNewButton_6 = new JButton("Create Workout Routine");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				
+				
+			}
+		});
+		btnNewButton_6.setBounds(98, 199, 296, 25);
+		panelTrainerDashboard.add(btnNewButton_6);
+		
+		JButton btnModifyWorkoutRoutine = new JButton("Modify Workout Routine");
+		btnModifyWorkoutRoutine.setBounds(98, 232, 296, 25);
+		panelTrainerDashboard.add(btnModifyWorkoutRoutine);
+		
+		JButton btnAssignWorkoutRoutine = new JButton("Assign Workout Routine");
+		btnAssignWorkoutRoutine.setBounds(98, 294, 296, 25);
+		panelTrainerDashboard.add(btnAssignWorkoutRoutine);
+		
+		panelSelectExercise = new JPanel();
+		panelSelectExercise.setLayout(null);
+		frame.getContentPane().add(panelSelectExercise, "name_5515521602152");
+		
+		scrollPane_7 = new JScrollPane();
+		scrollPane_7.setBounds(49, 83, 412, 303);
+		panelSelectExercise.add(scrollPane_7);
+		
+		list_7 = new JList();
+		scrollPane_7.setViewportView(list_7);
+		
+		
+		btnModifyExercise = new JButton("Modify Exercise");
+		btnModifyExercise.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				exercises.clear();
+				
+				for(Exercise exercise: workoutController.getExercises()){
+					exercises.addElement(exercise);
+				}
+				
+				 list_7.setModel(exercises);     
+				 scrollPane_7.getViewport().removeAll();
+				 scrollPane_7.setViewportView(list_7);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+		        	
+		        	panelSelectExercise.setVisible(true);
+			}
+		});
+		btnModifyExercise.setBounds(98, 139, 296, 25);
+		panelTrainerDashboard.add(btnModifyExercise);
 		
 		
 		textField_2 = new JTextField();
@@ -1527,6 +1608,338 @@ public class UI {
 		});
 		btnModifyEquipmentInventory.setBounds(141, 290, 261, 25);
 		panelManagerDashboard.add(btnModifyEquipmentInventory);
+		
+		panelCreateExercise = new JPanel();
+		frame.getContentPane().add(panelCreateExercise, "name_7335866307318");
+		panelCreateExercise.setLayout(null);
+		
+		JLabel lblCreateExercise = new JLabel("Create Exercise");
+		lblCreateExercise.setBounds(175, 23, 144, 15);
+		panelCreateExercise.add(lblCreateExercise);
+		
+		textField_31 = new JTextField();
+		textField_31.setBounds(185, 50, 187, 19);
+		panelCreateExercise.add(textField_31);
+		textField_31.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Name:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setBounds(112, 52, 70, 15);
+		panelCreateExercise.add(lblNewLabel_2);
+		
+		JScrollPane scrollPane_5 = new JScrollPane();
+		scrollPane_5.setBounds(195, 81, 200, 214);
+		panelCreateExercise.add(scrollPane_5);
+		
+		JList list_5 = new JList();
+		scrollPane_5.setRowHeaderView(list_5);
+		
+		JLabel lblExercises = new JLabel("Select Equipment:");
+		lblExercises.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblExercises.setBounds(42, 79, 150, 15);
+		panelCreateExercise.add(lblExercises);
+		
+		JLabel lblDuration = new JLabel("Duration:");
+		lblDuration.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDuration.setBounds(60, 311, 122, 15);
+		panelCreateExercise.add(lblDuration);
+		
+		textField_32 = new JTextField();
+		textField_32.setColumns(10);
+		textField_32.setBounds(185, 309, 187, 19);
+		panelCreateExercise.add(textField_32);
+		
+		JLabel lblNumberOfSets = new JLabel("Set Name:");
+		lblNumberOfSets.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNumberOfSets.setBounds(38, 492, 144, 15);
+		panelCreateExercise.add(lblNumberOfSets);
+		
+		textField_33 = new JTextField();
+		textField_33.setColumns(10);
+		textField_33.setBounds(185, 490, 187, 19);
+		panelCreateExercise.add(textField_33);
+		
+		JLabel lblRepsPerSet = new JLabel("Repititions per Set:");
+		lblRepsPerSet.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblRepsPerSet.setBounds(38, 521, 144, 15);
+		panelCreateExercise.add(lblRepsPerSet);
+		
+		textField_34 = new JTextField();
+		textField_34.setColumns(10);
+		textField_34.setBounds(185, 519, 187, 19);
+		panelCreateExercise.add(textField_34);
+		
+		
+		
+		
+		
+		JLabel lblExerciseStatus = new JLabel("");
+		lblExerciseStatus.setBounds(97, 625, 339, 15);
+		panelCreateExercise.add(lblExerciseStatus);
+		
+		JScrollPane scrollPane_6 = new JScrollPane();
+		scrollPane_6.setBounds(42, 366, 437, 105);
+		panelCreateExercise.add(scrollPane_6);
+		
+		JList list_6 = new JList();
+		scrollPane_6.setViewportView(list_6);
+		
+		JButton btnSaveChanges_1 = new JButton("Save Changes");
+		btnSaveChanges_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController wc = new WorkoutController();
+
+				List<EquipmentItem> selectedEquipmentItems =  list_5.getSelectedValuesList();
+				List<ExerciseSet> selectedExerciseSets =  list_6.getSelectedValuesList();
+				
+				selectedExercise.setName(textField_31.getText());
+				selectedExercise.setDuration(textField_32.getText());
+				selectedExercise.setEquipmentItems(new HashSet<EquipmentItem>(selectedEquipmentItems));
+				selectedExercise.setExerciseSets(new HashSet<ExerciseSet>(selectedExerciseSets));
+				
+				Response response = null;
+				
+				response = wc.addExercise(selectedExercise);
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					lblExerciseStatus.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					lblExerciseStatus.setText(response.StatusText);
+				}
+				
+				
+			}
+		});
+		btnSaveChanges_1.setBounds(165, 565, 200, 25);
+		panelCreateExercise.add(btnSaveChanges_1);
+		
+		JButton btnNewButton_7 = new JButton("Create Exercise");
+		btnNewButton_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController wc = new WorkoutController();
+
+				List<EquipmentItem> selectedEquipmentItems =  list_5.getSelectedValuesList();
+				List<ExerciseSet> selectedExerciseSets =  list_6.getSelectedValuesList();
+				
+				Response response = null;
+				
+				response = wc.addExercise(new Exercise(textField_31.getText(), textField_32.getText(),
+						new HashSet<EquipmentItem>(selectedEquipmentItems), new HashSet<ExerciseSet>(selectedExerciseSets)));
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					lblExerciseStatus.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					lblExerciseStatus.setText(response.StatusText);
+				}
+				
+			}
+		});
+		btnNewButton_7.setBounds(165, 565, 200, 25);
+		panelCreateExercise.add(btnNewButton_7);
+		
+		
+		
+		JLabel lblSet = new JLabel("Select Sets");
+		lblSet.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSet.setBounds(167, 342, 122, 19);
+		panelCreateExercise.add(lblSet);
+		
+		JButton btnNewButton_8 = new JButton("Add Set");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ExerciseSet exerciseSet = new ExerciseSet(textField_33.getText(), 
+						Integer.parseInt(textField_34.getText()));
+				
+				WorkoutController wc = new WorkoutController();
+				
+				Response response = wc.addExerciseSet(exerciseSet);
+				
+				if(response.isSuccess)
+				{
+					exerciseSets.clear();
+					
+					for(ExerciseSet es: wc.getExerciseSets()){
+						exerciseSets.addElement(es);
+					}
+					
+					textField_33.setText("");
+					textField_34.setText("");
+					
+				}else{
+					lblExerciseStatus.setText(response.StatusText);
+				}
+				
+			}
+		});
+		btnNewButton_8.setBounds(384, 498, 95, 25);
+		panelCreateExercise.add(btnNewButton_8);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setForeground(Color.BLACK);
+		separator_4.setBounds(39, 334, 419, 15);
+		panelCreateExercise.add(separator_4);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setForeground(Color.BLACK);
+		separator_5.setBounds(48, 548, 419, 15);
+		panelCreateExercise.add(separator_5);
+
+		btnCreateExercise = new JButton("Create Exercise");
+		btnCreateExercise.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lblExerciseStatus.setText("");
+				
+				btnNewButton_7.setVisible(true);
+				btnSaveChanges_1.setVisible(false);
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				equipmentItems.clear();
+				
+				for(EquipmentItem equipmentItem: workoutController.getEquipmentItems()){
+					equipmentItems.addElement(equipmentItem);
+				}
+				
+				exerciseSets.clear();
+				
+				for(ExerciseSet exerciseSet: workoutController.getExerciseSets()){
+					exerciseSets.addElement(exerciseSet);
+				}
+				
+				 list_5.setModel(equipmentItems);     
+				 scrollPane_5.getViewport().removeAll();
+				 scrollPane_5.setViewportView(list_5);
+				 
+				 list_5.setSelectionMode(
+		                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				 
+				 list_6.setModel(exerciseSets);     
+				 scrollPane_6.getViewport().removeAll();
+				 scrollPane_6.setViewportView(list_6);
+				
+				 list_6.setSelectionMode(
+		                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				 
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelCreateExercise.setVisible(true);
+				
+			}
+		});
+		btnCreateExercise.setBounds(98, 102, 296, 25);
+		panelTrainerDashboard.add(btnCreateExercise);
+		
+		
+		
+		lblPleaseSelectAn_1 = new JLabel("Please Select an Exercise");
+		lblPleaseSelectAn_1.setBounds(140, 12, 238, 15);
+		panelSelectExercise.add(lblPleaseSelectAn_1);
+		
+		
+		
+		button_4 = new JButton("Modify");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				selectedExercise = (Exercise) list_7.getSelectedValue();
+
+				lblExerciseStatus.setText("");
+				
+				btnNewButton_7.setVisible(false);
+				btnSaveChanges_1.setVisible(true);
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				equipmentItems.clear();
+				
+				for(EquipmentItem equipmentItem: workoutController.getEquipmentItems()){
+					equipmentItems.addElement(equipmentItem);
+				}
+				
+				exerciseSets.clear();
+				
+				for(ExerciseSet exerciseSet: workoutController.getExerciseSets()){
+					exerciseSets.addElement(exerciseSet);
+				}
+				
+				 list_5.setModel(equipmentItems);     
+				 scrollPane_5.getViewport().removeAll();
+				 scrollPane_5.setViewportView(list_5);
+				 
+				 list_5.setSelectionMode(
+		                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				 
+				 list_6.setModel(exerciseSets);     
+				 scrollPane_6.getViewport().removeAll();
+				 scrollPane_6.setViewportView(list_6);
+				
+				 list_6.setSelectionMode(
+		                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				 
+				 List<Integer> indices = new ArrayList<Integer>();
+				 
+				 for(EquipmentItem ei : selectedExercise.getEquipmentItems()){
+					 indices.add(equipmentItems.indexOf(ei));
+				 }
+				 
+				 int[] array = indices.stream().mapToInt(i->i).toArray();
+				 list_5.setSelectedIndices(array);
+				 
+				 indices.clear();
+				 
+				 for(ExerciseSet es : selectedExercise.getExerciseSets()){
+					 indices.add(exerciseSets.indexOf(es));
+				 }
+				 
+				 int[] array2 = indices.stream().mapToInt(i->i).toArray();
+				 list_6.setSelectedIndices(array2);
+				 
+				 textField_31.setText(selectedExercise.getName());
+				 textField_32.setText(selectedExercise.getDuration());
+				 
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelCreateExercise.setVisible(true);
+				
+			}
+		});
+		button_4.setBounds(170, 398, 177, 25);
+		panelSelectExercise.add(button_4);
+		
 		
 		
 		    

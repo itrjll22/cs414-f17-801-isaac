@@ -17,6 +17,8 @@ import org.hibernate.query.Query;
 
 import edu.colostate.cs.cs414.project.models.Customer;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
+import edu.colostate.cs.cs414.project.models.Exercise;
+import edu.colostate.cs.cs414.project.models.ExerciseSet;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -105,6 +107,36 @@ public class HibernatePersistenceService implements IPersistenceService{
 		try{
 			session.beginTransaction();
 			session.saveOrUpdate(customer);
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean addExerciseSet(ExerciseSet exerciseSet){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(exerciseSet);
+			session.getTransaction().commit();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean addExercise(Exercise exercise){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(exercise);
 			session.getTransaction().commit();
 			return true;
 		}catch(Exception e){
@@ -241,5 +273,43 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		
 		return equipmentItems;
+	}
+	
+	public List<ExerciseSet> getExerciseSets(){
+		
+		Session session = sessionFactory.openSession();
+		
+		List<ExerciseSet> exerciseSets = new ArrayList<ExerciseSet>();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+
+		CriteriaQuery<ExerciseSet> criteria = builder.createQuery(ExerciseSet.class);
+		
+		criteria.from(ExerciseSet.class);
+		
+		exerciseSets = session.createQuery(criteria).getResultList();
+		
+		
+		return exerciseSets;
+	}
+	
+	public List<Exercise> getExercises(){
+		
+		Session session = sessionFactory.openSession();
+		
+		List<Exercise> exercises = new ArrayList<Exercise>();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+
+		CriteriaQuery<Exercise> criteria = builder.createQuery(Exercise.class);
+		
+		criteria.from(Exercise.class);
+		
+		exercises = session.createQuery(criteria).getResultList();
+		
+		
+		return exercises;
 	}
 }
