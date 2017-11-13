@@ -23,6 +23,7 @@ import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
 import edu.colostate.cs.cs414.project.models.UserAccount;
+import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 
 public class HibernatePersistenceService implements IPersistenceService{
 	
@@ -46,6 +47,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(trainer);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -61,6 +63,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(trainer);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -78,6 +81,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			
 			session.delete(dbTrainer);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -93,6 +97,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(manager);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -108,6 +113,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(customer);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -123,6 +129,23 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(exerciseSet);
 			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean addWorkoutRoutine(WorkoutRoutine workoutRoutine){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(workoutRoutine);
+			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -138,6 +161,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(exercise);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -166,6 +190,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 			session.beginTransaction();
 			session.saveOrUpdate(equipmentItem);
 			session.getTransaction().commit();
+			session.close();
 			return true;
 		}catch(Exception e){
 			session.getTransaction().rollback();
@@ -180,6 +205,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		Trainer trainer = null;
 		try{
 			trainer = (Trainer) session.get(Trainer.class, id);
+			session.close();
 		}catch(Exception e){
 
 		}
@@ -193,6 +219,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		Customer customer = null;
 		try{
 			customer = (Customer) session.get(Customer.class, id);
+			session.close();
 		}catch(Exception e){
 
 		}
@@ -205,6 +232,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		UserAccount userAccount = null;
 		try{
 			userAccount = (UserAccount) session.get(UserAccount.class, username);
+			session.close();
 		}catch(Exception e){
 
 		}
@@ -220,6 +248,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		try{
 			Query query = session.createQuery("from HealthInsuranceProvider");
 			healthInsuranceProviders = query.list();
+			session.close();
 		}catch(Exception e){
 
 		}
@@ -235,6 +264,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		try{
 			Query query = session.createQuery("from Trainer");
 			trainers = query.list();
+			session.close();
 		}catch(Exception e){
 
 		}
@@ -250,6 +280,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		try{
 			Query query = session.createQuery("from Customer");
 			customers = query.list();
+			session.close();
 		}catch(Exception e){
 
 		}
@@ -271,6 +302,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		equipmentItems = session.createQuery(criteria).getResultList();
 		
+		session.close();
 		
 		return equipmentItems;
 	}
@@ -290,6 +322,7 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		exerciseSets = session.createQuery(criteria).getResultList();
 		
+		session.close();
 		
 		return exerciseSets;
 	}
@@ -309,7 +342,28 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		exercises = session.createQuery(criteria).getResultList();
 		
+		session.close();
 		
 		return exercises;
+	}
+	
+	public List<WorkoutRoutine> getWorkoutRoutines(){
+		
+		Session session = sessionFactory.openSession();
+		
+		List<WorkoutRoutine> workoutRoutines = new ArrayList<WorkoutRoutine>();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+
+		CriteriaQuery<WorkoutRoutine> criteria = builder.createQuery(WorkoutRoutine.class);
+		
+		criteria.from(WorkoutRoutine.class);
+		
+		workoutRoutines = session.createQuery(criteria).getResultList();
+		
+		session.close();
+		
+		return workoutRoutines;
 	}
 }

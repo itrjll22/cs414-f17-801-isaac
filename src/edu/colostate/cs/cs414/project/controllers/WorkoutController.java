@@ -15,6 +15,7 @@ import edu.colostate.cs.cs414.project.models.Response;
 import edu.colostate.cs.cs414.project.models.Trainer;
 import edu.colostate.cs.cs414.project.models.UserAccount;
 import edu.colostate.cs.cs414.project.models.UserInformation;
+import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 import edu.colostate.cs.cs414.project.persistence.HibernatePersistenceService;
 
 public class WorkoutController {
@@ -76,6 +77,20 @@ public class WorkoutController {
 		
 	}
 	
+	public Response addWorkoutRoutine(WorkoutRoutine workoutRoutine){
+		
+		Response response = new Response();
+		response.StatusText = "Add WorkoutRoutine unsuccessful.";
+		
+		if(dao.addWorkoutRoutine(workoutRoutine)){
+			response.isSuccess = true;
+			response.StatusText = "Add WorkoutRoutine success!";
+		}
+		
+		return response;
+		
+	}
+	
 	public List<EquipmentItem> getEquipmentItems(){
 		
 		return dao.getEquipmentItems();
@@ -91,6 +106,12 @@ public class WorkoutController {
 	public List<Exercise> getExercises(){
 		
 		return dao.getExercises();
+		
+	}
+	
+	public List<WorkoutRoutine> getWorkoutRoutines(){
+		
+		return dao.getWorkoutRoutines();
 		
 	}
 	

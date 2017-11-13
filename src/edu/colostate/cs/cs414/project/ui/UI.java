@@ -25,6 +25,7 @@ import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Response;
 import edu.colostate.cs.cs414.project.models.Trainer;
 import edu.colostate.cs.cs414.project.models.UserSecurityContext;
+import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -161,6 +162,7 @@ public class UI {
 	private Customer selectedCustomer;
 	private EquipmentItem selectedEquipmentItem;
 	private Exercise selectedExercise;
+	private WorkoutRoutine selectedWorkoutRoutine;
 	
 	private JPanel panelSelectCustomer;
 	private JLabel lblPleaseSelectA_1;
@@ -187,6 +189,16 @@ public class UI {
 	private JScrollPane scrollPane_7;
 	private JButton button_4;
 	private JList list_7;
+	private JPanel panelWorkoutRoutine;
+	private JScrollPane scrollPane_8;
+	private JLabel lblWorkoutRoutine;
+	private JButton btnCreateWorkoutRoutine;
+	private JTextField textField_35;
+	private JPanel panelSelectWorkoutRoutine;
+	private JScrollPane scrollPane_9;
+	private JLabel lblPleaseSelectA_2;
+	private JButton button_5;
+	private JList list_9;
 	
 	/**
 	 * Launch the application.
@@ -350,6 +362,8 @@ public class UI {
 		
 		DefaultListModel<Exercise> exercises = new DefaultListModel<Exercise>();
 		
+		DefaultListModel<WorkoutRoutine> workoutRoutines = new DefaultListModel<WorkoutRoutine>();
+		
 		JButton btnHireTrainer = new JButton("Hire Trainer");
 		btnHireTrainer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -494,23 +508,9 @@ public class UI {
 		lblWelcomeTrainer.setBounds(155, 40, 146, 15);
 		panelTrainerDashboard.add(lblWelcomeTrainer);
 		
-		JButton btnNewButton_6 = new JButton("Create Workout Routine");
-		btnNewButton_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				
-				
-				
-			}
-		});
-		btnNewButton_6.setBounds(98, 199, 296, 25);
-		panelTrainerDashboard.add(btnNewButton_6);
 		
-		JButton btnModifyWorkoutRoutine = new JButton("Modify Workout Routine");
-		btnModifyWorkoutRoutine.setBounds(98, 232, 296, 25);
-		panelTrainerDashboard.add(btnModifyWorkoutRoutine);
+		
+		
 		
 		JButton btnAssignWorkoutRoutine = new JButton("Assign Workout Routine");
 		btnAssignWorkoutRoutine.setBounds(98, 294, 296, 25);
@@ -1940,9 +1940,245 @@ public class UI {
 		button_4.setBounds(170, 398, 177, 25);
 		panelSelectExercise.add(button_4);
 		
+		panelWorkoutRoutine = new JPanel();
+		panelWorkoutRoutine.setLayout(null);
+		frame.getContentPane().add(panelWorkoutRoutine, "name_13835899612978");
+		
+		scrollPane_8 = new JScrollPane();
+		scrollPane_8.setBounds(53, 112, 412, 303);
+		panelWorkoutRoutine.add(scrollPane_8);
+		
+		JList list_8 = new JList();
+		scrollPane_8.setViewportView(list_8);
+		
+		lblWorkoutRoutine = new JLabel("Workout Routine");
+		lblWorkoutRoutine.setBounds(191, 12, 141, 15);
+		panelWorkoutRoutine.add(lblWorkoutRoutine);
 		
 		
-		    
+		
+		textField_35 = new JTextField();
+		textField_35.setBounds(151, 52, 270, 19);
+		panelWorkoutRoutine.add(textField_35);
+		textField_35.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Name:");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_3.setBounds(72, 52, 70, 15);
+		panelWorkoutRoutine.add(lblNewLabel_3);
+		
+		JLabel lblExercies = new JLabel("Exercises");
+		lblExercies.setBounds(53, 97, 70, 15);
+		panelWorkoutRoutine.add(lblExercies);
+		
+
+		JLabel lblWorkoutRoutineStatus = new JLabel("");
+		lblWorkoutRoutineStatus.setBounds(53, 530, 412, 15);
+		panelWorkoutRoutine.add(lblWorkoutRoutineStatus);
+		
+		JButton btnSaveChanges_2 = new JButton("Save Changes");
+		btnSaveChanges_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController wc = new WorkoutController();
+
+				
+				List<Exercise> selectedExercises =  list_8.getSelectedValuesList();
+				
+				selectedWorkoutRoutine.setName(textField_35.getText());
+				
+				selectedWorkoutRoutine.setExercises(new HashSet<Exercise>(selectedExercises));
+				
+				Response response = null;
+				
+				response = wc.addWorkoutRoutine(selectedWorkoutRoutine);
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					lblWorkoutRoutineStatus.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					lblWorkoutRoutineStatus.setText(response.StatusText);
+				}
+				
+				
+			}
+		});
+		btnSaveChanges_2.setBounds(123, 441, 233, 25);
+		panelWorkoutRoutine.add(btnSaveChanges_2);
+		
+		
+		JButton btnNewButton_6 = new JButton("Create Workout Routine");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				btnCreateWorkoutRoutine.setVisible(true);
+				btnSaveChanges_2.setVisible(false);
+				
+				textField_35.setText("");
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				exercises.clear();
+				
+				for(Exercise exercise: workoutController.getExercises()){
+					exercises.addElement(exercise);
+				}
+				
+				 list_8.setModel(exercises);     
+				 scrollPane_8.getViewport().removeAll();
+				 scrollPane_8.setViewportView(list_8);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+		        	
+		        panelWorkoutRoutine.setVisible(true);
+				
+				
+			}
+		});
+		btnNewButton_6.setBounds(98, 199, 296, 25);
+		panelTrainerDashboard.add(btnNewButton_6);
+		
+		btnCreateWorkoutRoutine = new JButton("Create Workout Routine");
+		btnCreateWorkoutRoutine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				WorkoutController wc = new WorkoutController();
+
+				List<Exercise> selectedExercises =  list_8.getSelectedValuesList();
+				
+				Response response = null;
+				
+				response = wc.addWorkoutRoutine(new WorkoutRoutine(textField_35.getText(), new HashSet<Exercise>(selectedExercises)));
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					lblWorkoutRoutineStatus.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					lblWorkoutRoutineStatus.setText(response.StatusText);
+				}
+				
+			}
+		});
+		btnCreateWorkoutRoutine.setBounds(123, 441, 233, 25);
+		panelWorkoutRoutine.add(btnCreateWorkoutRoutine);
+		
+		panelSelectWorkoutRoutine = new JPanel();
+		panelSelectWorkoutRoutine.setLayout(null);
+		frame.getContentPane().add(panelSelectWorkoutRoutine, "name_15445555665689");
+		
+		scrollPane_9 = new JScrollPane();
+		scrollPane_9.setBounds(49, 83, 412, 303);
+		panelSelectWorkoutRoutine.add(scrollPane_9);
+		
+		list_9 = new JList();
+		scrollPane_9.setViewportView(list_9);
+		
+		lblPleaseSelectA_2 = new JLabel("Please Select a Workout Routine");
+		lblPleaseSelectA_2.setBounds(140, 12, 238, 15);
+		panelSelectWorkoutRoutine.add(lblPleaseSelectA_2);
+		
+		button_5 = new JButton("Modify");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				selectedWorkoutRoutine = (WorkoutRoutine) list_9.getSelectedValue();
+
+				lblWorkoutRoutineStatus.setText("");
+				
+				btnCreateWorkoutRoutine.setVisible(false);
+				btnSaveChanges_2.setVisible(true);
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				exercises.clear();
+				
+				for(Exercise exercise: workoutController.getExercises()){
+					exercises.addElement(exercise);
+				}
+				
+				 list_8.setModel(exercises);     
+				 scrollPane_8.getViewport().removeAll();
+				 scrollPane_8.setViewportView(list_8);
+				
+				 list_8.setSelectionMode(
+		                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				 
+				 List<Integer> indices = new ArrayList<Integer>();
+				 
+				 for(Exercise ex : selectedWorkoutRoutine.getExercises()){
+					 indices.add(exercises.indexOf(ex));
+				 }
+				 
+				 int[] array = indices.stream().mapToInt(i->i).toArray();
+				 list_8.setSelectedIndices(array);
+				 
+				 
+				 textField_35.setText(selectedWorkoutRoutine.getName());
+				 
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelWorkoutRoutine.setVisible(true);
+				
+				
+			}
+		});
+		button_5.setBounds(170, 398, 177, 25);
+		panelSelectWorkoutRoutine.add(button_5);
+		
+		JButton btnModifyWorkoutRoutine = new JButton("Modify Workout Routine");
+		btnModifyWorkoutRoutine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				WorkoutController workoutController = new WorkoutController();
+				
+				workoutRoutines.clear();
+				
+				for(WorkoutRoutine workoutRoutine: workoutController.getWorkoutRoutines()){
+					workoutRoutines.addElement(workoutRoutine);
+				}
+				
+				 list_9.setModel(workoutRoutines);     
+				 scrollPane_9.getViewport().removeAll();
+				 scrollPane_9.setViewportView(list_9);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+		        	
+		        panelSelectWorkoutRoutine.setVisible(true);
+			
+			}
+		});
+		btnModifyWorkoutRoutine.setBounds(98, 232, 296, 25);
+		panelTrainerDashboard.add(btnModifyWorkoutRoutine);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			

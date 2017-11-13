@@ -10,6 +10,7 @@ import edu.colostate.cs.cs414.project.models.ExerciseSet;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
+import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 
 public interface IPersistenceService {
 
@@ -42,4 +43,8 @@ public interface IPersistenceService {
 	public boolean addExercise(Exercise exercise);
 	
 	public List<Exercise> getExercises();
+	
+	public boolean addWorkoutRoutine(WorkoutRoutine workoutRoutine);
+	
+	public List<WorkoutRoutine> getWorkoutRoutines();
 }
