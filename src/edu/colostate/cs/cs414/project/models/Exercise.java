@@ -28,9 +28,18 @@ public class Exercise {
 	private Set<ExerciseSet> exerciseSets;
 	
 	public Exercise(){
+		this.id = java.util.UUID.randomUUID().toString();
+	}
+	
+	public Exercise(String name){
+		
+		this.id = java.util.UUID.randomUUID().toString();
+		this.name = name;
+		
 		
 	}
 	
+	/*
 	public Exercise(String name, String duration, Set<EquipmentItem> equipmentItems, Set<ExerciseSet> exerciseSets){
 		
 		this.id = java.util.UUID.randomUUID().toString();
@@ -40,7 +49,23 @@ public class Exercise {
 		this.exerciseSets = exerciseSets;
 		
 	}
-
+*/
+	public void addName(String name){
+		this.name = name;
+	}
+	
+	public void addDuration(String duration){
+		this.duration = duration;
+	}
+	
+	public void addEquipmentItems(Set<EquipmentItem> equipmentItems){
+		this.equipmentItems = equipmentItems;
+	}
+	
+	public void addExerciseSets(Set<ExerciseSet> exerciseSets){
+		this.exerciseSets = exerciseSets;
+	}
+	
 	public String getId() {
 		return id;
 	}

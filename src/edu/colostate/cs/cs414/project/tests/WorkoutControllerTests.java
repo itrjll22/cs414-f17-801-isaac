@@ -129,7 +129,10 @@ public class WorkoutControllerTests {
 			exerciseSets.add(new ExerciseSet("Plank 5 minutes.", 4));
 			
 			
-			t = new Exercise("Insanityx2", "90 minutes", equipmentItems, exerciseSets);
+			t = new Exercise("Insanityx2");
+			t.addDuration("90 minutes");
+			t.addEquipmentItems(equipmentItems);
+			t.addExerciseSets(exerciseSets);
 			
 			assertEquals(wc.addExercise(t).isSuccess, true);
 			
@@ -169,7 +172,13 @@ public class WorkoutControllerTests {
 			exerciseSets.add(new ExerciseSet("Plank 5 minutes.", 4));
 			
 			Set<Exercise> exercises = new HashSet<Exercise>();
-			exercises.add(new Exercise("Insanityx2", "90 minutes", equipmentItems, exerciseSets));
+
+			Exercise t = new Exercise("Insanityx2");
+			t.addDuration("90 minutes");
+			t.addEquipmentItems(equipmentItems);
+			t.addExerciseSets(exerciseSets);
+			exercises.add(t);
+			
 			
 			wr = new WorkoutRoutine("Advanced", exercises);
 			
@@ -225,7 +234,11 @@ public class WorkoutControllerTests {
 			exerciseSets.add(new ExerciseSet("Plank 5 minutes.", 4));
 			
 			Set<Exercise> exercises = new HashSet<Exercise>();
-			exercises.add(new Exercise("Insanityx2", "90 minutes", equipmentItems, exerciseSets));
+			Exercise t = new Exercise("Insanityx2");
+			t.addDuration("90 minutes");
+			t.addEquipmentItems(equipmentItems);
+			t.addExerciseSets(exerciseSets);
+			exercises.add(t);
 			
 			wr = new WorkoutRoutine("Advanced", exercises);
 			
@@ -270,7 +283,11 @@ public class WorkoutControllerTests {
 			exerciseSets.add(new ExerciseSet("Plank 5 minutes.", 4));
 			
 			Set<Exercise> exercises = new HashSet<Exercise>();
-			exercises.add(new Exercise("Insanityx2", "90 minutes", equipmentItems, exerciseSets));
+			Exercise t = new Exercise("Insanityx2");
+			t.addDuration("90 minutes");
+			t.addEquipmentItems(equipmentItems);
+			t.addExerciseSets(exerciseSets);
+			exercises.add(t);
 			
 			wr = new WorkoutRoutine("Advanced", exercises);
 			

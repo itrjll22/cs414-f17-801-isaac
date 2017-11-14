@@ -1770,8 +1770,12 @@ public class UI {
 				
 				Response response = null;
 				
-				response = wc.addExercise(new Exercise(textField_31.getText(), textField_32.getText(),
-						new HashSet<EquipmentItem>(selectedEquipmentItems), new HashSet<ExerciseSet>(selectedExerciseSets)));
+				Exercise exercise = new Exercise(textField_31.getText());
+				exercise.addDuration(textField_32.getText());
+				exercise.addEquipmentItems(new HashSet<EquipmentItem>(selectedEquipmentItems));
+				exercise.addExerciseSets(new HashSet<ExerciseSet>(selectedExerciseSets));
+				
+				response = wc.addExercise(exercise);
 				
 				if(response.isSuccess)
 				{
