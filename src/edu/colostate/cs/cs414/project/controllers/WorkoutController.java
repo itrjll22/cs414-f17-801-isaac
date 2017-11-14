@@ -20,10 +20,11 @@ import edu.colostate.cs.cs414.project.models.UserAccount;
 import edu.colostate.cs.cs414.project.models.UserInformation;
 import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 import edu.colostate.cs.cs414.project.persistence.HibernatePersistenceService;
+import edu.colostate.cs.cs414.project.persistence.IPersistenceService;
 
 public class WorkoutController {
 
-	HibernatePersistenceService dao = HibernatePersistenceService.getInstance();
+	IPersistenceService dao = HibernatePersistenceService.getInstance();
 	
 	public WorkoutController(){
 		

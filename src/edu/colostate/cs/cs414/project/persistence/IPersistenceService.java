@@ -10,6 +10,7 @@ import edu.colostate.cs.cs414.project.models.ExerciseSet;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
+import edu.colostate.cs.cs414.project.models.UserAccount;
 import edu.colostate.cs.cs414.project.models.WorkoutRoutine;
 
 public interface IPersistenceService {
@@ -51,4 +52,6 @@ public interface IPersistenceService {
 	public List<Customer> searchCustomers(String searchTerm);
 	
 	public List<WorkoutRoutine> searchWorkoutRoutines(String searchTerm);
+	
+	public UserAccount getUserAccount(String username);
 }

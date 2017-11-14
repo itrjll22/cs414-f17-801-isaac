@@ -16,13 +16,14 @@ import edu.colostate.cs.cs414.project.models.Trainer;
 import edu.colostate.cs.cs414.project.models.UserAccount;
 import edu.colostate.cs.cs414.project.models.UserInformation;
 import edu.colostate.cs.cs414.project.persistence.HibernatePersistenceService;
+import edu.colostate.cs.cs414.project.persistence.IPersistenceService;
 import edu.colostate.cs.cs414.project.utilities.SecurityUtility;
 
 public class SecurityController {
 
 	private static final SecurityController instance = new SecurityController();
 	
-	HibernatePersistenceService dao = HibernatePersistenceService.getInstance();
+	IPersistenceService dao = HibernatePersistenceService.getInstance();
 	
 	private SecurityController(){
 		
