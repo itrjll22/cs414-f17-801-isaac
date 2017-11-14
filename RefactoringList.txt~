@@ -1,0 +1,7 @@
+Refactored by applying Builder pattern to Exercise model 
+
+Refactored User Information to follow Builder pattern instead of having large constructors.
+
+Refactored persistence service used in controllers as an interface in order increase polymorphism.
+
+Refactored moved searchCustomers from WorkoutController to UserController to ensure higher cohesion controller pattern.
