@@ -2434,7 +2434,7 @@ public class UI {
 				  
 					customers.clear();
 					
-					for(Customer customer : wc.seachCustomers(searchTerm)){
+					for(Customer customer : UserController.getInstance().seachCustomers(searchTerm)){
 						customers.addElement(customer);
 					}
 					
@@ -2452,7 +2452,7 @@ public class UI {
 				  
 					customers.clear();
 					
-					for(Customer customer : wc.seachCustomers(searchTerm)){
+					for(Customer customer : UserController.getInstance().seachCustomers(searchTerm)){
 						customers.addElement(customer);
 					}
 					

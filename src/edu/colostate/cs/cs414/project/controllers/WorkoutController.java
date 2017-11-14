@@ -134,12 +134,7 @@ public class WorkoutController {
 		
 	}
 	
-	public List<Customer> seachCustomers(String searchTerm){
-		
-		return dao.searchCustomers(searchTerm);
-		
-		
-	}
+	
 	
 	public List<WorkoutRoutine> searchWorkoutRoutines(String searchTerm){
 		

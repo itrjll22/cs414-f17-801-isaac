@@ -252,45 +252,6 @@ public class WorkoutControllerTests {
 		
 	}
 	
-	@Test
-	public void testSearchCustomers() {
-		
-		
-		Customer customer = null;
-		 
-		try {
-			
-			UserAccount ua = new UserAccount(testUtility.getPseudoRandomString(), "asdsdasd");
-			
-			UserInformation userInfo = new UserInformation(
-					"Isaac", "Trujillo",
-					new Phone("555-555-4444", "mobile"),
-					new Email("dfgfdg@rasdf.com", "personal"),
-					new Address("453 5th Street NE", "", "Albuquerque", "NM", "87125"),
-					new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
-					
-			
-			customer = new Customer(ua, userInfo);
-			
-			UserController.getInstance().registerCustomer(customer);
-			
-			boolean found = false;
-			
-			for(Customer c : wc.seachCustomers("Isa")){
-				if(c.getId().equalsIgnoreCase(customer.getId())){
-					found = true;
-				}
-			}
-			
-			assertEquals(found, true);
-			
-		} 
-		finally{
-			dao.deleteCustomer(customer);
-		
-		}
-		
-	}
 	
 	@Test
 	public void testSearchWorkoutRoutines() {

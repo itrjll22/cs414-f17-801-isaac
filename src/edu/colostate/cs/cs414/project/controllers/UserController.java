@@ -71,15 +71,13 @@ public class UserController {
 		
 	}
 
-	/*
-	public Response modifyCustomer(Customer customer){
+	
+	public List<Customer> seachCustomers(String searchTerm){
 		
-		//Customer existingCustomer = dao.get
+		return dao.searchCustomers(searchTerm);
 		
-		//dao.editCustomer(customer);
 		
-		return true;
-	}*/
+	}
 	
 
 	
