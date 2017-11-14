@@ -44,12 +44,12 @@ public class UserControllerTests {
 			
 			UserAccount ua = new UserAccount("RandomUsername", "password123");
 			
-			UserInformation userInfo = new UserInformation(
-					"Isaac", "Trujillo",
-					new Phone("555-555-5555", "mobile"),
-					new Email("randomuser@randomdomain.com", "personal"),
-					new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
-					new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
+			UserInformation userInfo = new UserInformation();
+			userInfo.addNames("Isaac", "Trujillo");
+			userInfo.addPhone(new Phone("555-555-5555", "mobile"));
+			userInfo.addEmail(new Email("randomuser@randomdomain.com", "personal"));
+			userInfo.addAddress(new Address("123 Some Place", "", "Albuquerque", "NM", "87125"));
+			userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
 					
 			
 			Trainer trainer = new Trainer(ua, userInfo);
@@ -61,12 +61,12 @@ public class UserControllerTests {
 			
 			UserAccount ua2 = new UserAccount("anotherUserName", "123123123");
 			
-			UserInformation userInfo2 = new UserInformation(
-					"Jannette", "Duke",
-					new Phone("555-555-5555", "mobile"),
-					new Email("jannette@randomdomain.com", "personal"),
-					new Address("123 Another Place", "", "Denver", "CO", "87125"),
-					new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
+			UserInformation userInfo2 = new UserInformation();
+			userInfo2.addNames("Jannette", "Duke");
+			userInfo2.addPhone(new Phone("555-555-5555", "mobile"));
+			userInfo2.addEmail(new Email("jannette@randomdomain.com", "personal"));
+			userInfo2.addAddress(new Address("123 Another Place", "", "Denver", "CO", "87125"));
+			userInfo2.addHealthInsuranceProvider(new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
 					
 			
 			Customer customer = new Customer(ua2, userInfo2);
@@ -102,12 +102,14 @@ public class UserControllerTests {
 		
 		UserAccount ua = new UserAccount(testUtility.getPseudoRandomString(), testUtility.getPseudoRandomString());
 		
-		UserInformation userInfo = new UserInformation(
-				"Isaac", "Trujillo",
-				new Phone("555-555-5555", "mobile"),
-				new Email("test@randomdomain.com", "personal"),
-				new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
-				new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
+		
+		
+		UserInformation userInfo = new UserInformation();
+		userInfo.addNames("Isaac", "Trujillo");
+		userInfo.addPhone(new Phone("555-555-5555", "mobile"));
+		userInfo.addEmail(new Email("test@randomdomain.com", "personal"));
+		userInfo.addAddress(new Address("123 Some Place", "", "Albuquerque", "NM", "87125"));
+		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
 				
 		
 		trainer = new Trainer(ua, userInfo);
@@ -163,12 +165,12 @@ public class UserControllerTests {
 		try {
 		UserAccount ua = new UserAccount(testUtility.getPseudoRandomString(), "asdsdasd");
 		
-		UserInformation userInfo = new UserInformation(
-				"Isaac", "Trujillo",
-				new Phone("555-555-4444", "mobile"),
-				new Email("dfgfdg@rasdf.com", "personal"),
-				new Address("453 5th Street NE", "", "Albuquerque", "NM", "87125"),
-				new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
+		UserInformation userInfo = new UserInformation();
+		userInfo.addNames("Isaac", "Trujillo");
+		userInfo.addPhone(new Phone("555-555-4444", "mobile"));
+		userInfo.addEmail(new Email("dfgfdg@rasdf.com", "personal"));
+		userInfo.addAddress(new Address("453 5th Street NE", "", "Albuquerque", "NM", "87125"));
+		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
 				
 		
 		customer = new Customer(ua, userInfo);
@@ -234,13 +236,13 @@ public class UserControllerTests {
 			
 			UserAccount ua = new UserAccount(testUtility.getPseudoRandomString(), "asdsdasd");
 			
-			UserInformation userInfo = new UserInformation(
-					"Isaac", "Trujillo",
-					new Phone("555-555-4444", "mobile"),
-					new Email("dfgfdg@rasdf.com", "personal"),
-					new Address("453 5th Street NE", "", "Albuquerque", "NM", "87125"),
-					new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
-					
+			UserInformation userInfo = new UserInformation();
+			userInfo.addNames("Isaac", "Trujillo");
+			userInfo.addPhone(new Phone("555-555-4444", "mobile"));
+			userInfo.addEmail(new Email("dfgfdg@rasdf.com", "personal"));
+			userInfo.addAddress(new Address("453 5th Street NE", "", "Albuquerque", "NM", "87125"));
+			userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
+			
 			
 			customer = new Customer(ua, userInfo);
 			

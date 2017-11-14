@@ -40,12 +40,12 @@ public class Trainer {
 		
 		UserAccount ua = new UserAccount(username, password);
 		
-		UserInformation userInfo = new UserInformation(
-				firstName, lastName,
-				new Phone(phone, ""),
-				new Email(email, ""),
-				new Address(address1, address2, city, state, zip),
-				new HealthInsuranceProvider(healthInsuranceProvider));
+		UserInformation userInfo = new UserInformation();
+		userInfo.addNames(firstName, lastName);
+		userInfo.addPhone(new Phone(phone, ""));
+		userInfo.addEmail(new Email(email, ""));
+		userInfo.addAddress(new Address(address1, address2, city, state, zip));
+		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(healthInsuranceProvider));	
 		
 		this.userAccount = ua;
 		this.userInformation = userInfo;
@@ -62,12 +62,12 @@ public class Trainer {
 		
 		UserAccount ua = new UserAccount(username, password);
 		
-		UserInformation userInfo = new UserInformation(
-				firstName, lastName,
-				new Phone(phone, ""),
-				new Email(email, ""),
-				new Address(address1, address2, city, state, zip),
-				healthInsuranceProvider);
+		UserInformation userInfo = new UserInformation();
+		userInfo.addNames(firstName, lastName);
+		userInfo.addPhone(new Phone(phone, ""));
+		userInfo.addEmail(new Email(email, ""));
+		userInfo.addAddress(new Address(address1, address2, city, state, zip));
+		userInfo.addHealthInsuranceProvider(healthInsuranceProvider);	
 		
 		this.userAccount = ua;
 		this.userInformation = userInfo;

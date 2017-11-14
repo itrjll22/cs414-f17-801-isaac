@@ -27,39 +27,6 @@ public class SecurityController {
 	
 	private SecurityController(){
 		
-		try{
-		
-			
-			UserAccount ua = new UserAccount("itrjllManager", "password123");
-			
-			UserInformation userInfo = new UserInformation(
-					"Isaac", "Trujillo",
-					new Phone("555-555-5555", "mobile"),
-					new Email("isaac.trujillo@colostate.edu", "student"),
-					new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
-					new HealthInsuranceProvider("Blue Cross Blue Shield"));
-			
-			Manager manager = new Manager(ua, userInfo);
-			
-			dao.addManager(manager);
-			
-		
-			UserAccount uaTrainer = new UserAccount("itrjllTrainer", "123123123");
-			
-			UserInformation userInfoTrainer = new UserInformation(
-					"Isaactrainer", "Trujillo",
-					new Phone("555-555-5555", "mobile"),
-					new Email("itrjll22@outlook.com", "student"),
-					new Address("123 Another Place", "", "Rio Rancho", "NM", "87144"),
-					new HealthInsuranceProvider("United Healthcare"));
-			
-			Trainer trainer = new Trainer(uaTrainer, userInfoTrainer);
-		
-			dao.addTrainer(trainer);
-		
-			}catch(Exception ex){
-				
-			}
 	}
 	
 	public static SecurityController getInstance(){ return instance;}

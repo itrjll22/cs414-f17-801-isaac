@@ -34,12 +34,13 @@ public class SecurityControllerTests {
 		
 		UserAccount ua = new UserAccount("testAcct", "password123");
 		
-		UserInformation userInfo = new UserInformation(
-				"Isaac", "Trujillo",
-				new Phone("555-555-5555", "mobile"),
-				new Email("testacct@test.com", "student"),
-				new Address("123 Some Place", "", "Albuquerque", "NM", "87125"),
-				new HealthInsuranceProvider("Green Cross Green Shield"));
+	
+		UserInformation userInfo = new UserInformation();
+		userInfo.addNames("Isaac", "Trujillo");
+		userInfo.addPhone(new Phone("555-555-5555", "mobile"));
+		userInfo.addEmail(new Email("testacct@test.com", "student"));
+		userInfo.addAddress(new Address("123 Some Place", "", "Albuquerque", "NM", "87125"));
+		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider("Green Cross Green Shield"));	
 		
 		Manager manager = new Manager(ua, userInfo);
 		

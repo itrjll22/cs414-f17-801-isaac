@@ -28,15 +28,6 @@ public class WorkoutController {
 	
 	public WorkoutController(){
 		
-		try{
-		
-			
-		
-		
-			}catch(Exception ex){
-				
-			}
-		
 	}
 	
 	public Response addEquipmentItem(EquipmentItem equipmentItem){

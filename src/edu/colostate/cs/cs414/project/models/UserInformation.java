@@ -49,9 +49,13 @@ public class UserInformation {
 	private HealthInsuranceProvider healthInsuranceProvider;
 	
 	public UserInformation(){
-		
+		this.id = java.util.UUID.randomUUID().toString();
 	}
 	
+	public UserInformation(String id){
+		this.id = id;
+	}
+	/*
 	public UserInformation(String firstName, String lastName, Phone phone, Email email, Address address, HealthInsuranceProvider healthInsuranceProvider){
 		
 		this.id = java.util.UUID.randomUUID().toString();
@@ -80,7 +84,28 @@ public class UserInformation {
 		this.healthInsuranceProvider = healthInsuranceProvider;
 		
 	}
+*/
+	
+	public void addNames(String firstName, String lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public void addPhone(Phone phone){
+		this.phone = phone;
+	}
 
+	public void addEmail(Email email){
+		this.email = email;
+	}
+	
+	public void addAddress(Address address){
+		this.address = address;
+	}
+	
+	public void addHealthInsuranceProvider(HealthInsuranceProvider healthInsuranceProvider){
+		this.healthInsuranceProvider = healthInsuranceProvider;
+	}
 
 	@Override
 	public int hashCode() {
