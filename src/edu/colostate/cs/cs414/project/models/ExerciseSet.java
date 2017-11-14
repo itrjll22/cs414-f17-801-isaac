@@ -9,9 +9,9 @@ public class ExerciseSet {
 	@Id
 	private String id;
 	
-	String name;
+	private String name;
 	
-	int repititions;
+	private int repititions;
 	
 	public ExerciseSet(){
 		

@@ -21,6 +21,17 @@
                       </ownedParameter>
                       <ownedParameter xmi:type="uml:Parameter" xmi:id="_OfhpYbrOEeeau4kXk1EeTQ" name="equipmentItem" type="_OfemELrOEeeau4kXk1EeTQ"/>
                     </ownedOperation>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_XuDGgMkIEeeY_6z9ZubsDw" name="addEquipmentItem() : Response"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_a70DAMkIEeeY_6z9ZubsDw" name="addExercise : Response"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_eINGgMkIEeeY_6z9ZubsDw" name="addExerciseSet : Response"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_gKl1AMkIEeeY_6z9ZubsDw" name="addWorkoutRoutine : Response"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_h5b8cMkIEeeY_6z9ZubsDw" name="assignWorkoutRoutines : Response"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_kSVGcMkIEeeY_6z9ZubsDw" name="getEquipmentItems : List&lt;EquipmentItem>"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_nf8R8MkIEeeY_6z9ZubsDw" name="getExerciseSets : List&lt;ExerciseSet>"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_pd5zcMkIEeeY_6z9ZubsDw" name="getExercises : List&lt;Exercise>"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_q5m8cMkIEeeY_6z9ZubsDw" name="getWorkoutRoutines : List&lt;WorkoutRoutine>"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_tIDJ8MkIEeeY_6z9ZubsDw" name="searchWorkoutRoutines : List&lt;WorkoutRoutine>"/>
+                    <ownedOperation xmi:type="uml:Operation" xmi:id="_wkKEcMkIEeeY_6z9ZubsDw" name="getCustomerAssignedWorkoutRoutine : List&lt;Customer>"/>
                   </packagedElement>
                   <packagedElement xmi:type="uml:Class" xmi:id="_OfkFoLrOEeeau4kXk1EeTQ" name="UserController" visibility="public">
                     <ownedAttribute xmi:type="uml:Property" xmi:id="_OfkFobrOEeeau4kXk1EeTQ" name="dao" visibility="private" type="_9Y1OMLrNEeeau4kXk1EeTQ" isUnique="false">
@@ -482,7 +493,16 @@
                     </ownedBehavior>
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_R1I6UrrOEeeau4kXk1EeTQ" name="Response" visibility="public" method="_R1L9oLrOEeeau4kXk1EeTQ"/>
                   </packagedElement>
-                  <packagedElement xmi:type="uml:Class" xmi:id="_R1NLwLrOEeeau4kXk1EeTQ" name="Exercise" visibility="public"/>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_R1NLwLrOEeeau4kXk1EeTQ" name="Exercise" visibility="public">
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_Rmd5sMkHEeeY_6z9ZubsDw" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_Yn_bsMkHEeeY_6z9ZubsDw" name="name" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_aE_lMMkHEeeY_6z9ZubsDw" name="duration" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ">
+                      <ownedComment xmi:type="uml:Comment" xmi:id="_nDol4MkHEeeY_6z9ZubsDw">
+                        <body>- equipmentItems : Set&lt;EquipmentItem></body>
+                      </ownedComment>
+                    </ownedAttribute>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_JxUs8skIEeeY_6z9ZubsDw" name="workoutroutine" type="_R3kjQLrOEeeau4kXk1EeTQ" association="_JxUF4MkIEeeY_6z9ZubsDw"/>
+                  </packagedElement>
                   <packagedElement xmi:type="uml:Enumeration" xmi:id="_R1Ny0LrOEeeau4kXk1EeTQ" name="Enum_Role" visibility="public">
                     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_R1Ny0brOEeeau4kXk1EeTQ" name="Trainer"/>
                     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_R1TSYLrOEeeau4kXk1EeTQ" name="Manager"/>
@@ -1113,7 +1133,6 @@
                       </ownedComment>
                     </ownedAttribute>
                   </packagedElement>
-                  <packagedElement xmi:type="uml:Class" xmi:id="_R2nhALrOEeeau4kXk1EeTQ" name="ExerciseSet" visibility="public"/>
                   <packagedElement xmi:type="uml:Class" xmi:id="_R2pWMLrOEeeau4kXk1EeTQ" name="Phone" visibility="public">
                     <ownedAttribute xmi:type="uml:Property" xmi:id="_R2pWMbrOEeeau4kXk1EeTQ" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ" isUnique="false"/>
                     <ownedAttribute xmi:type="uml:Property" xmi:id="_R2p9QLrOEeeau4kXk1EeTQ" name="userInformation" visibility="private" type="_R0Tz4LrOEeeau4kXk1EeTQ" isUnique="false"/>
@@ -1503,6 +1522,9 @@
                     <ownedOperation xmi:type="uml:Operation" xmi:id="_u7PJ8LrSEeeau4kXk1EeTQ" name="equal;s"/>
                   </packagedElement>
                   <packagedElement xmi:type="uml:Class" xmi:id="_R3kjQLrOEeeau4kXk1EeTQ" name="WorkoutRoutine" visibility="public">
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_Md6PAMkIEeeY_6z9ZubsDw" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_OUogEMkIEeeY_6z9ZubsDw" name="name" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+                    <ownedAttribute xmi:type="uml:Property" xmi:id="_6COhYskIEeeY_6z9ZubsDw" name="customer" type="_R1W8wbrOEeeau4kXk1EeTQ" association="_6CN6UMkIEeeY_6z9ZubsDw"/>
                     <nestedClassifier xmi:type="uml:Class" xmi:id="_R3iuELrOEeeau4kXk1EeTQ" name="EquipmentItem" visibility="public">
                       <ownedAttribute xmi:type="uml:Property" xmi:id="_R3jVILrOEeeau4kXk1EeTQ" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ" isUnique="false"/>
                       <ownedAttribute xmi:type="uml:Property" xmi:id="_R3jVIbrOEeeau4kXk1EeTQ" name="name" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ" isUnique="false"/>
@@ -1514,6 +1536,20 @@
                       <ownedAttribute xmi:type="uml:Property" xmi:id="_R3j8MrrOEeeau4kXk1EeTQ" name="quantity" visibility="private" isUnique="false">
                         <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
                       </ownedAttribute>
+                      <ownedAttribute xmi:type="uml:Property" xmi:id="__Otp0ckHEeeY_6z9ZubsDw" name="exercise" type="_R1NLwLrOEeeau4kXk1EeTQ" association="__OtCwMkHEeeY_6z9ZubsDw"/>
+                      <ownedAttribute xmi:type="uml:Property" xmi:id="_DIn6oMkIEeeY_6z9ZubsDw" name="Attribute1"/>
+                      <nestedClassifier xmi:type="uml:Class" xmi:id="_rK258MkHEeeY_6z9ZubsDw" name="EquipmentItem" visibility="public">
+                        <ownedAttribute xmi:type="uml:Property" xmi:id="_rK258ckHEeeY_6z9ZubsDw" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ" isUnique="false"/>
+                        <ownedAttribute xmi:type="uml:Property" xmi:id="_rK258skHEeeY_6z9ZubsDw" name="name" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ" isUnique="false"/>
+                        <ownedAttribute xmi:type="uml:Property" xmi:id="_rK2588kHEeeY_6z9ZubsDw" name="picture" visibility="private" isUnique="false">
+                          <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_DxuQ4PaLEeW5KOK8aDMdgA"/>
+                          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rK259MkHEeeY_6z9ZubsDw"/>
+                          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rK259ckHEeeY_6z9ZubsDw" value="*"/>
+                        </ownedAttribute>
+                        <ownedAttribute xmi:type="uml:Property" xmi:id="_rK259skHEeeY_6z9ZubsDw" name="quantity" visibility="private" isUnique="false">
+                          <type xmi:type="uml:PrimitiveType" href="pathmap://PapyrusJava_LIBRARIES/JavaLibrary.uml#_7wRIABydEduyofBvg4RL2w"/>
+                        </ownedAttribute>
+                      </nestedClassifier>
                     </nestedClassifier>
                   </packagedElement>
                   <packagedElement xmi:type="uml:Class" xmi:id="_R3oNoLrOEeeau4kXk1EeTQ" name="Email" visibility="public">
@@ -2004,6 +2040,40 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_OwOowrrXEeeau4kXk1EeTQ" name="customer" type="_R1W8wbrOEeeau4kXk1EeTQ" association="_OwOBsLrXEeeau4kXk1EeTQ"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_tHV0wMkHEeeY_6z9ZubsDw" name="ExerciseSet">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_vWwSoMkHEeeY_6z9ZubsDw" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_yyVBoMkHEeeY_6z9ZubsDw" name="name" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_zwR3oMkHEeeY_6z9ZubsDw" name="Attribute1">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_1A7AIMkHEeeY_6z9ZubsDw">
+          <body>- repititions : Int</body>
+        </ownedComment>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_92RQMskHEeeY_6z9ZubsDw" name="exercise" type="_R1NLwLrOEeeau4kXk1EeTQ" association="_92QpIMkHEeeY_6z9ZubsDw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_92QpIMkHEeeY_6z9ZubsDw" memberEnd="_92RQMskHEeeY_6z9ZubsDw _92R3QMkHEeeY_6z9ZubsDw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_92RQMMkHEeeY_6z9ZubsDw" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_92RQMckHEeeY_6z9ZubsDw" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_92R3QMkHEeeY_6z9ZubsDw" name="exerciseset" type="_tHV0wMkHEeeY_6z9ZubsDw" association="_92QpIMkHEeeY_6z9ZubsDw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="__OtCwMkHEeeY_6z9ZubsDw" memberEnd="__Otp0ckHEeeY_6z9ZubsDw __Otp0skHEeeY_6z9ZubsDw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__OtCwckHEeeY_6z9ZubsDw" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="__Otp0MkHEeeY_6z9ZubsDw" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="__Otp0skHEeeY_6z9ZubsDw" name="equipmentitem" type="_R3iuELrOEeeau4kXk1EeTQ" association="__OtCwMkHEeeY_6z9ZubsDw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_JxUF4MkIEeeY_6z9ZubsDw" memberEnd="_JxUs8skIEeeY_6z9ZubsDw _JxUs88kIEeeY_6z9ZubsDw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_JxUs8MkIEeeY_6z9ZubsDw" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_JxUs8ckIEeeY_6z9ZubsDw" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_JxUs88kIEeeY_6z9ZubsDw" name="exercise" type="_R1NLwLrOEeeau4kXk1EeTQ" association="_JxUF4MkIEeeY_6z9ZubsDw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_6CN6UMkIEeeY_6z9ZubsDw" memberEnd="_6COhYskIEeeY_6z9ZubsDw _6COhY8kIEeeY_6z9ZubsDw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6COhYMkIEeeY_6z9ZubsDw" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_6COhYckIEeeY_6z9ZubsDw" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_6COhY8kIEeeY_6z9ZubsDw" name="workoutroutine" type="_R3kjQLrOEeeau4kXk1EeTQ" association="_6CN6UMkIEeeY_6z9ZubsDw"/>
+    </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_xQEFkLrNEeeau4kXk1EeTQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_xSJwQLrNEeeau4kXk1EeTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>
@@ -2086,4 +2156,6 @@
   <ActionLanguage:TextualRepresentation xmi:id="_MuvZgLrUEeeau4kXk1EeTQ" base_Comment="_MutkULrUEeeau4kXk1EeTQ" language="org.eclipse.papyrus.uml.textedit.property.xtext.UmlProperty"/>
   <ActionLanguage:TextualRepresentation xmi:id="_Ovgh8LrVEeeau4kXk1EeTQ" base_Comment="_OvfT0LrVEeeau4kXk1EeTQ" language="org.eclipse.papyrus.uml.textedit.property.xtext.UmlProperty"/>
   <ActionLanguage:TextualRepresentation xmi:id="_NvOUMLrWEeeau4kXk1EeTQ" base_Comment="_NvMfALrWEeeau4kXk1EeTQ" language="org.eclipse.papyrus.uml.textedit.property.xtext.UmlProperty"/>
+  <ActionLanguage:TextualRepresentation xmi:id="_nEBAYMkHEeeY_6z9ZubsDw" base_Comment="_nDol4MkHEeeY_6z9ZubsDw" language="org.eclipse.papyrus.uml.textedit.property.xtext.UmlProperty"/>
+  <ActionLanguage:TextualRepresentation xmi:id="_1A-DcMkHEeeY_6z9ZubsDw" base_Comment="_1A7AIMkHEeeY_6z9ZubsDw" language="org.eclipse.papyrus.uml.textedit.property.xtext.UmlProperty"/>
 </xmi:XMI>
