@@ -95,6 +95,96 @@ public class HibernatePersistenceService implements IPersistenceService{
 		}
 	}
 	
+	public boolean deleteCustomer(Customer customer){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			Customer dbCustomer = (Customer) session.get(Customer.class, customer.getId());
+			
+			session.delete(dbCustomer);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean deleteEquipmentItem(EquipmentItem t){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			EquipmentItem dbT = (EquipmentItem) session.get(EquipmentItem.class, t.getId());
+			
+			session.delete(dbT);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean deleteExerciseSet(ExerciseSet t){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			ExerciseSet dbT = (ExerciseSet) session.get(ExerciseSet.class, t.getId());
+			
+			session.delete(dbT);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean deleteExercise(Exercise t){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			Exercise dbT = (Exercise) session.get(Exercise.class, t.getId());
+			
+			session.delete(dbT);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean deleteWorkoutRoutine(WorkoutRoutine t){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			WorkoutRoutine dbT = (WorkoutRoutine) session.get(WorkoutRoutine.class, t.getId());
+			
+			session.delete(dbT);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
 	public boolean addManager(Manager manager){
 		
 		Session session = sessionFactory.openSession();
