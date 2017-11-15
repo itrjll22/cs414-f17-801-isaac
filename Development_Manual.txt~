@@ -22,5 +22,3 @@ Development Manual
          root
       </property>
 6. Run the edu.colostate.cs.cs.cs414.project.ui.login.java file as a Java Application
-7. Log in as Username:manager   Password: password123
-

@@ -74,7 +74,7 @@ public class SecurityControllerTests {
 	}
 	
 	@Test
-	public void testInvalidAuthenticationCaseSensitivityPUsername() {
+	public void testInvalidAuthenticationCaseSensitivityUsername() {
 		Response response = securityController.authenticate("testacct", "password123");
 		
 		assertEquals(response.isSuccess, true);
