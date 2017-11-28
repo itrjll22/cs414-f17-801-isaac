@@ -494,4 +494,36 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		return workoutRoutines;
 	}
+	
+	public List<Trainer> searchTrainers(String searchTerm){
+		
+		Session session = sessionFactory.openSession();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+		Query query = session.createQuery("select t from Trainer t join t.userInformation userInfo"
+				+ " where userInfo.firstName like :searchTerm OR userInfo.lastName like :searchTerm");
+		
+		List<Trainer> trainers = query.setParameter("searchTerm", "%" + searchTerm + "%").list();
+		
+		session.close();
+		
+		return trainers;
+	}
+	
+	public List<EquipmentItem> searchEquipmentItems(String searchTerm){
+		
+		Session session = sessionFactory.openSession();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+		Query query = session.createQuery("select ei from EquipmentItem ei"
+				+ " where ei.name like :searchTerm");
+		
+		List<EquipmentItem> equipmentItems = query.setParameter("searchTerm", "%" + searchTerm + "%").list();
+		
+		session.close();
+		
+		return equipmentItems;
+	}
 }

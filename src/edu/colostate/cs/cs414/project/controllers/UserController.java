@@ -79,6 +79,12 @@ public class UserController {
 		
 	}
 	
+	public List<Trainer> searchTrainers(String searchTerm){
+		
+		return dao.searchTrainers(searchTerm);
+		
+		
+	}
 
 	
 }

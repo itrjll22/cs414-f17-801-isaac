@@ -161,7 +161,7 @@ public class UserAccount {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Arrays.hashCode(passwordHash);
-		result = prime * result + ((salt == null) ? 0 : salt.hashCode());
+		result = prime * result + Arrays.hashCode(salt);
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -176,17 +176,21 @@ public class UserAccount {
 		if (getClass() != obj.getClass())
 			return false;
 		UserAccount other = (UserAccount) obj;
+		
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		
+		
 		if (!Arrays.equals(passwordHash, other.passwordHash))
 			return false;
+		
 		if (salt == null) {
 			if (other.salt != null)
 				return false;
-		} else if (!salt.equals(other.salt))
+		} else if (!Arrays.equals(salt,other.salt))
 			return false;
 		if (username == null) {
 			if (other.username != null)

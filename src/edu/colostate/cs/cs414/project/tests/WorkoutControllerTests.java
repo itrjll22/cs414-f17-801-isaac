@@ -313,5 +313,36 @@ public class WorkoutControllerTests {
 		}
 		
 	}
+	
+	
+	@Test
+	public void testSearchEquipmentItem() {
+
+		EquipmentItem t = null;
+		
+		try {
+			
+			t = new EquipmentItem("Stairmaster", 12, folder.newFile("test.jpg"));
+			
+			assertEquals(wc.addEquipmentItem(t).isSuccess, true);
+			
+			boolean tFound = false;
+			
+			for(EquipmentItem e : dao.searchEquipmentItems("stairmaster")){
+				if(e.getId().equalsIgnoreCase(t.getId())){
+					tFound = true;
+				}
+			}
+			
+			assertEquals(tFound, true);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			dao.deleteEquipmentItem(t);
+		}
+		
+	}
 
 }

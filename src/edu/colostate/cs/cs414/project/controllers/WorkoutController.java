@@ -150,4 +150,11 @@ public class WorkoutController {
 		return matches;
 	}
 	
+	public List<EquipmentItem> searchEquipmentItems(String searchTerm){
+		
+		return dao.searchEquipmentItems(searchTerm);
+		
+		
+	}
+	
 }

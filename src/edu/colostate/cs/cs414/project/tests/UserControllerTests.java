@@ -266,5 +266,45 @@ public class UserControllerTests {
 		
 	}
 	
+	@Test
+	public void testSearchTrainers() {
+		
+		
+		Trainer trainer = null;
+		 
+		try {
+			
+			UserAccount ua = new UserAccount(testUtility.getPseudoRandomString(), "jdoes");
+			
+			UserInformation userInfo = new UserInformation();
+			userInfo.addNames("John", "Does");
+			userInfo.addPhone(new Phone("555-555-4444", "mobile"));
+			userInfo.addEmail(new Email("jdoe@rasdf.com", "personal"));
+			userInfo.addAddress(new Address("112 8th Street NE", "", "Albuquerque", "NM", "87125"));
+			userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(testUtility.getPseudoRandomString()));
+			
+			
+			trainer = new Trainer(ua, userInfo);
+			
+			UserController.getInstance().hireTrainer(trainer);
+			
+			boolean found = false;
+			
+			for(Trainer t : UserController.getInstance().searchTrainers("does")){
+				if(t.getId().equalsIgnoreCase(trainer.getId())){
+					found = true;
+				}
+			}
+			
+			assertEquals(found, true);
+			
+		} 
+		finally{
+			dao.deleteTrainer(trainer);
+		
+		}
+		
+	}
+	
 	
 }

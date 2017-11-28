@@ -54,4 +54,8 @@ public interface IPersistenceService {
 	public List<WorkoutRoutine> searchWorkoutRoutines(String searchTerm);
 	
 	public UserAccount getUserAccount(String username);
+	
+	public List<Trainer> searchTrainers(String searchTerm);
+	
+	public List<EquipmentItem> searchEquipmentItems(String searchTerm);
 }
