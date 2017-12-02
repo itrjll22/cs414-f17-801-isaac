@@ -246,6 +246,22 @@ public class UI {
 	private JTextField textField_39;
 	private JButton button_7;
 	private JList list_17;
+	private JButton button_8;
+	private JButton button_9;
+	private JButton button_10;
+	private JButton button_11;
+	private JButton button_12;
+	private JButton button_13;
+	private JButton button_14;
+	private JButton button_15;
+	private JButton button_16;
+	private JButton button_17;
+	private JButton button_18;
+	private JButton button_19;
+	private JButton button_20;
+	private JButton button_21;
+	private JButton btnSignout;
+	private JButton button_22;
 	
 	/**
 	 * Launch the application.
@@ -544,7 +560,7 @@ public class UI {
 		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(67, 424, 392, 15);
+		lblNewLabel_1.setBounds(70, 521, 392, 15);
 		panelManagerDashboard.add(lblNewLabel_1);
 		
 		panelTrainerDashboard = new JPanel();
@@ -872,8 +888,21 @@ public class UI {
 		tbHiddenTrainerGUID.setVisible(false);
 		
 		btnModifyTrainer = new JButton("Save Changes");
-		btnModifyTrainer.setBounds(187, 602, 167, 25);
+		btnModifyTrainer.setBounds(163, 602, 167, 25);
 		panelHireTrainer.add(btnModifyTrainer);
+		
+		JButton btnNewButton_9 = new JButton("Cancel");
+		btnNewButton_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		btnNewButton_9.setBounds(350, 602, 88, 25);
+		panelHireTrainer.add(btnNewButton_9);
 		
 		btnModifyTrainer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1278,6 +1307,19 @@ public class UI {
 		tbHiddenCustomerGUID.setBounds(47, 592, 4, 19);
 		panelRegisterCustomer.add(tbHiddenCustomerGUID);
 		tbHiddenCustomerGUID.setColumns(10);
+		
+		button_8 = new JButton("Cancel");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_8.setBounds(355, 602, 88, 25);
+		panelRegisterCustomer.add(button_8);
 		tbHiddenCustomerGUID.setVisible(false);
 		
 		panelEquipmentInventory = new JPanel();
@@ -1381,7 +1423,7 @@ public class UI {
 				
 			}
 		});
-		btnSaveEquipmentItem.setBounds(160, 549, 197, 25);
+		btnSaveEquipmentItem.setBounds(76, 549, 197, 25);
 		panelEquipmentInventory.add(btnSaveEquipmentItem);
 		
 		label_14 = new JLabel("");
@@ -1429,13 +1471,26 @@ public class UI {
 				
 			}
 		});
-		btnSaveEquipmentItemChanges.setBounds(160, 549, 197, 25);
+		btnSaveEquipmentItemChanges.setBounds(76, 549, 197, 25);
 		panelEquipmentInventory.add(btnSaveEquipmentItemChanges);
 		
 		tbHiddenEquipmentItemGUID = new JTextField();
 		tbHiddenEquipmentItemGUID.setBounds(26, 522, 16, 19);
 		panelEquipmentInventory.add(tbHiddenEquipmentItemGUID);
 		tbHiddenEquipmentItemGUID.setColumns(10);
+		
+		button_12 = new JButton("Cancel");
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_12.setBounds(326, 549, 88, 25);
+		panelEquipmentInventory.add(button_12);
 		tbHiddenEquipmentItemGUID.setVisible(false);
 		
 		panelSelectTrainer = new JPanel();
@@ -1505,8 +1560,21 @@ public class UI {
 				
 			}
 		});
-		btnNewButton_5.setBounds(170, 398, 177, 25);
+		btnNewButton_5.setBounds(103, 398, 177, 25);
 		panelSelectTrainer.add(btnNewButton_5);
+		
+		button_9 = new JButton("Cancel");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_9.setBounds(344, 398, 88, 25);
+		panelSelectTrainer.add(button_9);
 		
 		panelSelectCustomer = new JPanel();
 		panelSelectCustomer.setLayout(null);
@@ -1576,8 +1644,20 @@ public class UI {
 				
 			}
 		});
-		button_1.setBounds(170, 398, 177, 25);
+		button_1.setBounds(95, 398, 177, 25);
 		panelSelectCustomer.add(button_1);
+		
+		button_11 = new JButton("Cancel");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_11.setBounds(326, 398, 88, 25);
+		panelSelectCustomer.add(button_11);
 		
 
 		panelSelectEquipmentItem = new JPanel();
@@ -1626,8 +1706,21 @@ public class UI {
 				
 			}
 		});
-		button_2.setBounds(170, 398, 177, 25);
+		button_2.setBounds(110, 398, 177, 25);
 		panelSelectEquipmentItem.add(button_2);
+		
+		button_13 = new JButton("Cancel");
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_13.setBounds(325, 398, 88, 25);
+		panelSelectEquipmentItem.add(button_13);
 		
 		
 		
@@ -1683,6 +1776,24 @@ public class UI {
 		});
 		btnSearchForEquipment.setBounds(141, 364, 261, 25);
 		panelManagerDashboard.add(btnSearchForEquipment);
+		
+		btnSignout = new JButton("Logout");
+		btnSignout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField.setText("");
+				textField_1.setText("");
+		    	   
+		    	label.setText("");
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelLogin.setVisible(true);
+				
+			}
+		});
+		btnSignout.setBounds(141, 428, 199, 25);
+		panelManagerDashboard.add(btnSignout);
 		
 		panelCreateExercise = new JPanel();
 		frame.getContentPane().add(panelCreateExercise, "name_7335866307318");
@@ -1801,7 +1912,7 @@ public class UI {
 				
 			}
 		});
-		btnSaveChanges_1.setBounds(165, 565, 200, 25);
+		btnSaveChanges_1.setBounds(97, 565, 200, 25);
 		panelCreateExercise.add(btnSaveChanges_1);
 		
 		JButton btnNewButton_7 = new JButton("Create Exercise");
@@ -1845,7 +1956,7 @@ public class UI {
 				
 			}
 		});
-		btnNewButton_7.setBounds(165, 565, 200, 25);
+		btnNewButton_7.setBounds(97, 565, 200, 25);
 		panelCreateExercise.add(btnNewButton_7);
 		
 		
@@ -1895,6 +2006,19 @@ public class UI {
 		separator_5.setForeground(Color.BLACK);
 		separator_5.setBounds(48, 548, 419, 15);
 		panelCreateExercise.add(separator_5);
+		
+		button_15 = new JButton("Cancel");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_15.setBounds(363, 565, 88, 25);
+		panelCreateExercise.add(button_15);
 
 		btnCreateExercise = new JButton("Create Exercise");
 		btnCreateExercise.addActionListener(new ActionListener() {
@@ -2016,8 +2140,21 @@ public class UI {
 				
 			}
 		});
-		button_4.setBounds(170, 398, 177, 25);
+		button_4.setBounds(105, 398, 177, 25);
 		panelSelectExercise.add(button_4);
+		
+		button_16 = new JButton("Cancel");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_16.setBounds(326, 398, 88, 25);
+		panelSelectExercise.add(button_16);
 		
 		panelWorkoutRoutine = new JPanel();
 		panelWorkoutRoutine.setLayout(null);
@@ -2096,7 +2233,7 @@ public class UI {
 				
 			}
 		});
-		btnSaveChanges_2.setBounds(123, 441, 233, 25);
+		btnSaveChanges_2.setBounds(72, 441, 233, 25);
 		panelWorkoutRoutine.add(btnSaveChanges_2);
 		
 		
@@ -2168,8 +2305,21 @@ public class UI {
 				
 			}
 		});
-		btnCreateWorkoutRoutine.setBounds(123, 441, 233, 25);
+		btnCreateWorkoutRoutine.setBounds(72, 441, 233, 25);
 		panelWorkoutRoutine.add(btnCreateWorkoutRoutine);
+		
+		button_17 = new JButton("Cancel");
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_17.setBounds(349, 441, 88, 25);
+		panelWorkoutRoutine.add(button_17);
 		
 		panelSelectWorkoutRoutine = new JPanel();
 		panelSelectWorkoutRoutine.setLayout(null);
@@ -2231,8 +2381,21 @@ public class UI {
 				
 			}
 		});
-		button_5.setBounds(170, 398, 177, 25);
+		button_5.setBounds(85, 398, 177, 25);
 		panelSelectWorkoutRoutine.add(button_5);
+		
+		button_18 = new JButton("Cancel");
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_18.setBounds(315, 398, 88, 25);
+		panelSelectWorkoutRoutine.add(button_18);
 		
 		JButton btnModifyWorkoutRoutine = new JButton("Modify Workout Routine");
 		btnModifyWorkoutRoutine.addActionListener(new ActionListener() {
@@ -2343,6 +2506,24 @@ public class UI {
 		btnSearchWorkoutroutines.setBounds(98, 398, 296, 25);
 		panelTrainerDashboard.add(btnSearchWorkoutroutines);
 		
+		button_22 = new JButton("Logout");
+		button_22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField.setText("");
+				textField_1.setText("");
+		    	   
+		    	label.setText("");
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelLogin.setVisible(true);
+				
+			}
+		});
+		button_22.setBounds(98, 464, 296, 25);
+		panelTrainerDashboard.add(button_22);
+		
 		list_10.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -2427,8 +2608,21 @@ public class UI {
 				
 			}
 		});
-		btnAssign.setBounds(170, 545, 177, 25);
+		btnAssign.setBounds(92, 545, 177, 25);
 		panelAssignWorkouts.add(btnAssign);
+		
+		button_19 = new JButton("Cancel");
+		button_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_19.setBounds(311, 545, 88, 25);
+		panelAssignWorkouts.add(button_19);
 		
 		panelSearchCustomers = new JPanel();
 		panelSearchCustomers.setLayout(null);
@@ -2538,6 +2732,19 @@ public class UI {
 		btnView.setBounds(170, 398, 177, 25);
 		panelSearchCustomers.add(btnView);
 		
+		button_20 = new JButton("Cancel");
+		button_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_20.setBounds(204, 613, 88, 25);
+		panelSearchCustomers.add(button_20);
+		
 		panelSearchWorkoutRoutines = new JPanel();
 		panelSearchWorkoutRoutines.setLayout(null);
 		frame.getContentPane().add(panelSearchWorkoutRoutines, "name_26379538324514");
@@ -2598,6 +2805,19 @@ public class UI {
 		button_6.setBounds(170, 398, 177, 25);
 		panelSearchWorkoutRoutines.add(button_6);
 		
+		button_21 = new JButton("Cancel");
+		button_21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
+		button_21.setBounds(208, 622, 88, 25);
+		panelSearchWorkoutRoutines.add(button_21);
+		
 		panelSearchTrainers = new JPanel();
 		panelSearchTrainers.setLayout(null);
 		frame.getContentPane().add(panelSearchTrainers, "name_333011807753");
@@ -2624,8 +2844,21 @@ public class UI {
 		panelSearchTrainers.add(textField_38);
 		
 		btnModify = new JButton("Modify");
-		btnModify.setBounds(170, 398, 177, 25);
+		btnModify.setBounds(94, 398, 177, 25);
 		panelSearchTrainers.add(btnModify);
+		
+		button_10 = new JButton("Cancel");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_10.setBounds(313, 398, 88, 25);
+		panelSearchTrainers.add(button_10);
 		
 		panelSearchEquipmentItems = new JPanel();
 		panelSearchEquipmentItems.setLayout(null);
@@ -2679,8 +2912,21 @@ public class UI {
 				
 			}
 		});
-		button_7.setBounds(170, 398, 177, 25);
+		button_7.setBounds(94, 398, 177, 25);
 		panelSearchEquipmentItems.add(button_7);
+		
+		button_14 = new JButton("Cancel");
+		button_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+	        	
+	        	panelManagerDashboard.setVisible(true);
+				
+			}
+		});
+		button_14.setBounds(343, 398, 88, 25);
+		panelSearchEquipmentItems.add(button_14);
 		
 		textField_37.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
