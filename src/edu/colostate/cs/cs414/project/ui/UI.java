@@ -757,42 +757,44 @@ public class UI {
 				Response response = null;
 				
 				if(selectedProvider != null){
-				
+					
+					Trainer trainerToHire = new Trainer(textField_11.getText());
+					
+					trainerToHire.addNames(textField_2.getText(), textField_3.getText());
+					trainerToHire.addAddress(textField_4.getText(),textField_6.getText(),
+							textField_5.getText(),
+							textField_7.getText(),
+							textField_9.getText());
+					
+					trainerToHire.addPhone(textField_8.getText());
+					trainerToHire.addEmail(textField_10.getText());
+					trainerToHire.addHealthInsuranceProvider(selectedProvider);
+					trainerToHire.addWorkHours(textField_12.getText());
+					trainerToHire.addQualifications(textField_15.getText());
+					trainerToHire.addUsernamePassword(textField_14.getText(),textField_16.getText());
+					
 					response = UserController.getInstance()
-							.hireTrainer(new Trainer(textField_2.getText(),
-									textField_3.getText(),
-									textField_4.getText(),
-									textField_6.getText(),
-									textField_5.getText(),
-									textField_7.getText(),
-									textField_9.getText(),
-									textField_8.getText(),
-									textField_10.getText(),
-									textField_11.getText(),
-									selectedProvider,
-									textField_12.getText(),
-									textField_15.getText(),
-									textField_14.getText(),
-									textField_16.getText()
-									));
+							.hireTrainer(trainerToHire);
 				}else{
+					
+					Trainer trainerToHire = new Trainer(textField_11.getText());
+					
+					trainerToHire.addNames(textField_2.getText(), textField_3.getText());
+					trainerToHire.addAddress(textField_4.getText(),textField_6.getText(),
+							textField_5.getText(),
+							textField_7.getText(),
+							textField_9.getText());
+					
+					trainerToHire.addPhone(textField_8.getText());
+					trainerToHire.addEmail(textField_10.getText());
+					trainerToHire.addHealthInsuranceProvider(textField_13.getText());
+					trainerToHire.addWorkHours(textField_12.getText());
+					trainerToHire.addQualifications(textField_15.getText());
+					trainerToHire.addUsernamePassword(textField_14.getText(),textField_16.getText());
+					
 					response = UserController.getInstance()
-							.hireTrainer(new Trainer(textField_2.getText(),
-									textField_3.getText(),
-									textField_4.getText(),
-									textField_6.getText(),
-									textField_5.getText(),
-									textField_7.getText(),
-									textField_9.getText(),
-									textField_8.getText(),
-									textField_10.getText(),
-									textField_11.getText(),
-									textField_13.getText(),
-									textField_12.getText(),
-									textField_15.getText(),
-									textField_14.getText(),
-									textField_16.getText()
-									));
+							.hireTrainer(trainerToHire);
+					
 				}
 				
 				
@@ -1111,39 +1113,40 @@ public class UI {
 				
 				if(selectedProvider != null){
 				
+					Customer customerToRegister = new Customer(textField_26.getText());
+					
+					customerToRegister.addNames(textField_17.getText(),
+							textField_18.getText());
+					
+					customerToRegister.addAddress(textField_19.getText(),textField_20.getText(),
+							textField_21.getText(),textField_22.getText(),textField_23.getText());
+					customerToRegister.addPhone(textField_24.getText());
+					customerToRegister.addEmail(textField_25.getText());
+					customerToRegister.addHealthInsuranceProvider(selectedProvider);
+					customerToRegister.setIsActive(chckbxActive.isSelected());
+					customerToRegister.addUsernamePassword(textField_28.getText(),
+							passwordField.getText());
+					
 					response = UserController.getInstance()
-							.registerCustomer(new Customer(textField_17.getText(),
-									textField_18.getText(),
-									textField_19.getText(),
-									textField_20.getText(),
-									textField_21.getText(),
-									textField_22.getText(),
-									textField_23.getText(),
-									textField_24.getText(),
-									textField_25.getText(),
-									textField_26.getText(),
-									selectedProvider,
-									chckbxActive.isSelected(),
-									textField_28.getText(),
-									passwordField.getText()
-									));
+							.registerCustomer(customerToRegister);
 				}else{
+					
+					Customer customerToRegister = new Customer(textField_26.getText());
+					
+					customerToRegister.addNames(textField_17.getText(),
+							textField_18.getText());
+					
+					customerToRegister.addAddress(textField_19.getText(),textField_20.getText(),
+							textField_21.getText(),textField_22.getText(),textField_23.getText());
+					customerToRegister.addPhone(textField_24.getText());
+					customerToRegister.addEmail(textField_25.getText());
+					customerToRegister.addHealthInsuranceProvider(textField_27.getText());
+					customerToRegister.setIsActive(chckbxActive.isSelected());
+					customerToRegister.addUsernamePassword(textField_28.getText(),
+							passwordField.getText());
+					
 					response = UserController.getInstance()
-							.registerCustomer(new Customer(textField_17.getText(),
-									textField_18.getText(),
-									textField_19.getText(),
-									textField_20.getText(),
-									textField_21.getText(),
-									textField_22.getText(),
-									textField_23.getText(),
-									textField_24.getText(),
-									textField_25.getText(),
-									textField_26.getText(),
-									textField_27.getText(),
-									chckbxActive.isSelected(),
-									textField_28.getText(),
-									passwordField.getText()
-									));
+							.registerCustomer(customerToRegister);
 				}
 				
 				if(response.isSuccess)

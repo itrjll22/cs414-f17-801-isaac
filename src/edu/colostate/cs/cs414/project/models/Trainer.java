@@ -31,51 +31,53 @@ public class Trainer {
 	private String qualifications;
 
 	public Trainer(){
+	
+		this.userInformation = new UserInformation();
 		
 	}
 	
-	public Trainer(String firstName, String lastName, String address1, String address2, String city, String state,
-			String zip, String phone, String email, String id, String healthInsuranceProvider, String workHours,
-			String qualifications, String username, String password){
-		
-		UserAccount ua = new UserAccount(username, password);
-		
-		UserInformation userInfo = new UserInformation();
-		userInfo.addNames(firstName, lastName);
-		userInfo.addPhone(new Phone(phone, ""));
-		userInfo.addEmail(new Email(email, ""));
-		userInfo.addAddress(new Address(address1, address2, city, state, zip));
-		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider(healthInsuranceProvider));	
-		
-		this.userAccount = ua;
-		this.userInformation = userInfo;
-		
-		this.workHours = workHours;
-		this.qualifications = qualifications;
-		
+	public Trainer(String id){
 		this.id = id;
+		
+		this.userInformation = new UserInformation();
 	}
 	
-	public Trainer(String firstName, String lastName, String address1, String address2, String city, String state,
-			String zip, String phone, String email, String id, HealthInsuranceProvider healthInsuranceProvider, String workHours,
-			String qualifications, String username, String password){
+	public void addNames(String firstName, String lastName){
 		
-		UserAccount ua = new UserAccount(username, password);
+		this.userInformation.addNames(firstName, lastName);
 		
-		UserInformation userInfo = new UserInformation();
-		userInfo.addNames(firstName, lastName);
-		userInfo.addPhone(new Phone(phone, ""));
-		userInfo.addEmail(new Email(email, ""));
-		userInfo.addAddress(new Address(address1, address2, city, state, zip));
-		userInfo.addHealthInsuranceProvider(healthInsuranceProvider);	
-		
-		this.userAccount = ua;
-		this.userInformation = userInfo;
-		
+	}
+	
+	public void addAddress(String address1, String address2, String city, String state,String zip){
+		this.userInformation.addAddress(new Address(address1, address2, city, state, zip));
+	}
+	
+	public void addPhone(String phone){
+		this.userInformation.addPhone(new Phone(phone, ""));
+	}
+	
+	public void addEmail(String email){
+		this.userInformation.addEmail(new Email(email, ""));
+	}
+	
+	public void addHealthInsuranceProvider(String healthInsuranceProvider){
+		this.userInformation.addHealthInsuranceProvider(new HealthInsuranceProvider(healthInsuranceProvider));	
+	}
+	
+	public void addHealthInsuranceProvider(HealthInsuranceProvider healthInsuranceProvider){
+		this.userInformation.addHealthInsuranceProvider(healthInsuranceProvider);	
+	}
+	
+	public void addUsernamePassword(String username, String password){
+		this.userAccount = new UserAccount(username, password);
+	}
+	
+	public void addWorkHours(String workHours){
 		this.workHours = workHours;
+	}
+	
+	public void addQualifications(String qualifications){
 		this.qualifications = qualifications;
-		
-		this.id = id;
 	}
 	
 	public Trainer(UserAccount userAccount, UserInformation userInformation){
