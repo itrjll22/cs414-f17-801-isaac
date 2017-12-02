@@ -231,6 +231,21 @@ public class UI {
 	private JButton button_6;
 	private JList list_14;
 	private JList list_15;
+	private JPanel panelSearchTrainers;
+	private JLabel lblSearchForA_2;
+	private JScrollPane scrollPane_16;
+	private JLabel label_19;
+	private JTextField textField_38;
+	private JButton btnModify;
+	private JButton btnSearchForTrainer;
+	private JButton btnSearchForEquipment;
+	private JPanel panelSearchEquipmentItems;
+	private JLabel lblSearchForEquipment;
+	private JScrollPane scrollPane_17;
+	private JLabel label_20;
+	private JTextField textField_39;
+	private JButton button_7;
+	private JList list_17;
 	
 	/**
 	 * Launch the application.
@@ -455,7 +470,7 @@ public class UI {
 				
 			}
 		});
-		btnNewButton_1.setBounds(141, 150, 199, 25);
+		btnNewButton_1.setBounds(141, 196, 199, 25);
 		panelManagerDashboard.add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("Modify Trainer");
@@ -502,7 +517,7 @@ public class UI {
 				
 			}
 		});
-		btnNewButton_3.setBounds(141, 189, 199, 25);
+		btnNewButton_3.setBounds(141, 235, 199, 25);
 		panelManagerDashboard.add(btnNewButton_3);
 		
 		btnNewButton_4 = new JButton("New Equipment Inventory");
@@ -518,7 +533,7 @@ public class UI {
 				
 			}
 		});
-		btnNewButton_4.setBounds(141, 249, 261, 25);
+		btnNewButton_4.setBounds(141, 283, 261, 25);
 		panelManagerDashboard.add(btnNewButton_4);
 		
 		
@@ -529,7 +544,7 @@ public class UI {
 		
 		lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(66, 361, 392, 15);
+		lblNewLabel_1.setBounds(67, 424, 392, 15);
 		panelManagerDashboard.add(lblNewLabel_1);
 		
 		panelTrainerDashboard = new JPanel();
@@ -1636,8 +1651,35 @@ public class UI {
 				
 			}
 		});
-		btnModifyEquipmentInventory.setBounds(141, 290, 261, 25);
+		btnModifyEquipmentInventory.setBounds(141, 324, 261, 25);
 		panelManagerDashboard.add(btnModifyEquipmentInventory);
+		
+		btnSearchForTrainer = new JButton("Search for Trainer");
+		btnSearchForTrainer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				
+				setComponentVisibility(frame, JPanel.class, false);
+					
+				panelSearchTrainers.setVisible(true);
+			}
+		});
+		btnSearchForTrainer.setBounds(141, 131, 199, 25);
+		panelManagerDashboard.add(btnSearchForTrainer);
+		
+		btnSearchForEquipment = new JButton("Search for Equipment Inventory");
+		btnSearchForEquipment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+					
+				panelSearchEquipmentItems.setVisible(true);
+				
+			}
+		});
+		btnSearchForEquipment.setBounds(141, 364, 261, 25);
+		panelManagerDashboard.add(btnSearchForEquipment);
 		
 		panelCreateExercise = new JPanel();
 		frame.getContentPane().add(panelCreateExercise, "name_7335866307318");
@@ -2553,6 +2595,90 @@ public class UI {
 		button_6.setBounds(170, 398, 177, 25);
 		panelSearchWorkoutRoutines.add(button_6);
 		
+		panelSearchTrainers = new JPanel();
+		panelSearchTrainers.setLayout(null);
+		frame.getContentPane().add(panelSearchTrainers, "name_333011807753");
+		
+		lblSearchForA_2 = new JLabel("Search for a Trainer");
+		lblSearchForA_2.setBounds(171, 12, 244, 15);
+		panelSearchTrainers.add(lblSearchForA_2);
+		
+		scrollPane_16 = new JScrollPane();
+		scrollPane_16.setBounds(49, 83, 412, 303);
+		panelSearchTrainers.add(scrollPane_16);
+		
+		JList list_16 = new JList();
+		scrollPane_16.setViewportView(list_16);
+		
+		label_19 = new JLabel("Search:");
+		label_19.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_19.setBounds(35, 54, 70, 15);
+		panelSearchTrainers.add(label_19);
+		
+		textField_38 = new JTextField();
+		textField_38.setColumns(10);
+		textField_38.setBounds(107, 52, 356, 19);
+		panelSearchTrainers.add(textField_38);
+		
+		btnModify = new JButton("Modify");
+		btnModify.setBounds(170, 398, 177, 25);
+		panelSearchTrainers.add(btnModify);
+		
+		panelSearchEquipmentItems = new JPanel();
+		panelSearchEquipmentItems.setLayout(null);
+		frame.getContentPane().add(panelSearchEquipmentItems, "name_3967688953740");
+		
+		lblSearchForEquipment = new JLabel("Search for Equipment Items");
+		lblSearchForEquipment.setBounds(171, 12, 244, 15);
+		panelSearchEquipmentItems.add(lblSearchForEquipment);
+		
+		scrollPane_17 = new JScrollPane();
+		scrollPane_17.setBounds(49, 83, 412, 303);
+		panelSearchEquipmentItems.add(scrollPane_17);
+		
+		list_17 = new JList();
+		scrollPane_17.setViewportView(list_17);
+		
+		label_20 = new JLabel("Search:");
+		label_20.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_20.setBounds(35, 54, 70, 15);
+		panelSearchEquipmentItems.add(label_20);
+		
+		textField_39 = new JTextField();
+		textField_39.setColumns(10);
+		textField_39.setBounds(107, 52, 356, 19);
+		panelSearchEquipmentItems.add(textField_39);
+		
+		button_7 = new JButton("Modify");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				label_14.setText("");
+				
+				selectedEquipmentItem = (EquipmentItem) list_17.getSelectedValue();
+				
+				tbHiddenEquipmentItemGUID.setText(selectedEquipmentItem.getId());
+				
+				btnSaveEquipmentItem.setVisible(false);
+				btnSaveEquipmentItemChanges.setVisible(true);
+				
+				textField_29.setText(selectedEquipmentItem.getName());
+				textField_30.setText(String.valueOf(selectedEquipmentItem.getQuantity()));
+				
+				lbl_picture.setIcon(resizeImageIcon(selectedEquipmentItem.getImageIcon(), lbl_picture));
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelEquipmentInventory.setVisible(true);
+				
+				
+				
+				
+			}
+		});
+		button_7.setBounds(170, 398, 177, 25);
+		panelSearchEquipmentItems.add(button_7);
+		
 		textField_37.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
 			   
@@ -2632,5 +2758,149 @@ public class UI {
 		    	   
 		       }
 		      });
+		
+		
+		textField_38.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				   
+				  
+					
+				  
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+			    
+				  String searchTerm = textField_38.getText();
+				  
+					trainers.clear();
+					
+					for(Trainer t : UserController.getInstance().searchTrainers(searchTerm)){
+						trainers.addElement(t);
+					}
+					
+					
+					 list_16.setModel(trainers);     
+					 scrollPane_16.getViewport().removeAll();
+					 scrollPane_16.setViewportView(list_16);
+				  
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  String searchTerm = textField_38.getText();
+				  
+					trainers.clear();
+					
+					for(Trainer t : UserController.getInstance().searchTrainers(searchTerm)){
+						trainers.addElement(t);
+					}
+					
+					
+					 list_16.setModel(trainers);     
+					 scrollPane_16.getViewport().removeAll();
+					 scrollPane_16.setViewportView(list_16);
+				  
+			  }
+			  
+			  
+
+			});
+		
+		btnModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+
+				healthInsuranceProviders.clear();
+				
+				for(HealthInsuranceProvider provider : SystemGeneralController.getInstance().getHealthInsuranceProviders()){
+					healthInsuranceProviders.addElement(provider);
+				
+				}
+				
+				 list_1.setModel(healthInsuranceProviders);     
+				 scrollPane_1.getViewport().removeAll();
+				 scrollPane_1.setViewportView(list_1);
+				
+				 
+				selectedTrainer = (Trainer) list_16.getSelectedValue();
+				
+				tbHiddenTrainerGUID.setText(selectedTrainer.getId());
+				
+				btnCreate.setVisible(false);
+				btnModifyTrainer.setVisible(true);
+				//btnCreate.setText("Save changes.");
+				
+				
+				textField_2.setText(selectedTrainer.getUserInformation().getFirstName());
+				textField_3.setText(selectedTrainer.getUserInformation().getLastName());
+				
+				textField_4.setText(selectedTrainer.getUserInformation().getAddress().getAddressLine1());
+				textField_6.setText(selectedTrainer.getUserInformation().getAddress().getAddressLine2());
+				textField_5.setText(selectedTrainer.getUserInformation().getAddress().getCity());
+				textField_7.setText(selectedTrainer.getUserInformation().getAddress().getState());
+				textField_9.setText(selectedTrainer.getUserInformation().getAddress().getZip());
+				
+				textField_8.setText(selectedTrainer.getUserInformation().getPhone().getNumber());
+				textField_10.setText(selectedTrainer.getUserInformation().getEmail().getEmail());
+				textField_11.setText(selectedTrainer.getId());
+				textField_11.setEnabled(false);
+				
+				list_1.setSelectedIndex(healthInsuranceProviders.indexOf(selectedTrainer.getUserInformation().getHealthInsuranceProvider()));
+				
+				textField_12.setText(selectedTrainer.getWorkHours());
+				textField_15.setText(selectedTrainer.getQualifications());
+				textField_14.setText(selectedTrainer.getUserAccount().getUsername());
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelHireTrainer.setVisible(true);
+				
+			}
+		});
+	
+		textField_39.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				   
+				  
+					
+				  
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+			    
+				  String searchTerm = textField_39.getText();
+				  
+				  WorkoutController wc = new WorkoutController();
+				  
+					equipmentItems.clear();
+					
+					for(EquipmentItem ei : wc.searchEquipmentItems(searchTerm)){
+						equipmentItems.addElement(ei);
+					}
+					
+					
+					 list_17.setModel(equipmentItems);     
+					 scrollPane_17.getViewport().removeAll();
+					 scrollPane_17.setViewportView(list_17);
+				  
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  String searchTerm = textField_39.getText();
+				  
+				  WorkoutController wc = new WorkoutController();
+				  
+					equipmentItems.clear();
+					
+					for(EquipmentItem ei : wc.searchEquipmentItems(searchTerm)){
+						equipmentItems.addElement(ei);
+					}
+					
+					
+					 list_17.setModel(equipmentItems);     
+					 scrollPane_17.getViewport().removeAll();
+					 scrollPane_17.setViewportView(list_17);
+				  
+			  }
+			  
+			  
+
+			});
+		
 	}
 }
