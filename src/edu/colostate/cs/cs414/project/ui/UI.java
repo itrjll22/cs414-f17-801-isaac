@@ -25,6 +25,7 @@ import edu.colostate.cs.cs414.project.models.Enum_Role;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
 import edu.colostate.cs.cs414.project.models.Exercise;
 import edu.colostate.cs.cs414.project.models.ExerciseSet;
+import edu.colostate.cs.cs414.project.models.FitnessClass;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Response;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -168,7 +169,7 @@ public class UI {
 	private EquipmentItem selectedEquipmentItem;
 	private Exercise selectedExercise;
 	private WorkoutRoutine selectedWorkoutRoutine;
-	
+	private FitnessClass selectedFitnessClass;
 	//private Customer searchedCustomer; 
 	
 	private JPanel panelSelectCustomer;
@@ -262,6 +263,15 @@ public class UI {
 	private JButton button_21;
 	private JButton btnSignout;
 	private JButton button_22;
+	private JTextField textField_40;
+	private JTextField textField_41;
+	private JButton buttonModifyFitnessClass;
+	private JPanel panelSelectFitnessClass;
+	private JScrollPane scrollPane_20;
+	private JLabel lblPleaseSelectA_3;
+	private JButton button_23;
+	private JButton button_25;
+	private JList list_20;
 	
 	/**
 	 * Launch the application.
@@ -426,6 +436,8 @@ public class UI {
 		DefaultListModel<Exercise> exercises = new DefaultListModel<Exercise>();
 		
 		DefaultListModel<WorkoutRoutine> workoutRoutines = new DefaultListModel<WorkoutRoutine>();
+		
+		DefaultListModel<FitnessClass> fitnessClasses = new DefaultListModel<FitnessClass>();
 		
 		JButton btnHireTrainer = new JButton("Hire Trainer");
 		btnHireTrainer.addActionListener(new ActionListener() {
@@ -2521,8 +2533,36 @@ public class UI {
 				
 			}
 		});
-		button_22.setBounds(98, 464, 296, 25);
+		button_22.setBounds(98, 549, 296, 25);
 		panelTrainerDashboard.add(button_22);
+		
+
+		
+		
+		JButton btnModifyFitnessClass = new JButton("Modify Fitness Class");
+		btnModifyFitnessClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController workoutController = new WorkoutController();
+				
+				fitnessClasses.clear();
+				
+				for(FitnessClass fc: workoutController.getFitnessClasses()){
+					fitnessClasses.addElement(fc);
+				}
+				
+				 list_20.setModel(fitnessClasses);     
+				 scrollPane_20.getViewport().removeAll();
+				 scrollPane_20.setViewportView(list_20);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+		        	
+		        panelSelectFitnessClass.setVisible(true);
+				
+			}
+		});
+		btnModifyFitnessClass.setBounds(98, 495, 296, 25);
+		panelTrainerDashboard.add(btnModifyFitnessClass);
 		
 		list_10.addListSelectionListener(new ListSelectionListener() {
 
@@ -2928,6 +2968,107 @@ public class UI {
 		button_14.setBounds(343, 398, 88, 25);
 		panelSearchEquipmentItems.add(button_14);
 		
+		JPanel panelFitnessClass = new JPanel();
+		panelFitnessClass.setLayout(null);
+		frame.getContentPane().add(panelFitnessClass, "name_4258557012138");
+		
+		JLabel lblSelectACustomer = new JLabel("Trainers");
+		lblSelectACustomer.setBounds(37, 122, 244, 15);
+		panelFitnessClass.add(lblSelectACustomer);
+		
+		JScrollPane scrollPane_18 = new JScrollPane();
+		scrollPane_18.setBounds(37, 149, 412, 195);
+		panelFitnessClass.add(scrollPane_18);
+		
+		JList list_18 = new JList();
+		scrollPane_18.setViewportView(list_18);
+		
+		JScrollPane scrollPane_19 = new JScrollPane();
+		scrollPane_19.setBounds(37, 383, 412, 195);
+		panelFitnessClass.add(scrollPane_19);
+		
+		JList list_19 = new JList();
+		scrollPane_19.setViewportView(list_19);
+		
+		JLabel lblSelectCustomers = new JLabel("Customers");
+		lblSelectCustomers.setBounds(37, 356, 380, 15);
+		panelFitnessClass.add(lblSelectCustomers);
+		
+		JLabel lblCreateFitnessClass = new JLabel("Create Fitness Class");
+		lblCreateFitnessClass.setBounds(157, 12, 244, 15);
+		panelFitnessClass.add(lblCreateFitnessClass);
+		
+		JLabel label_23 = new JLabel("");
+		label_23.setBounds(37, 636, 394, 15);
+		panelFitnessClass.add(label_23);
+		
+		JButton btnCreateFitnessClass = new JButton("Create");
+		btnCreateFitnessClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				WorkoutController wc = new WorkoutController();
+
+				List<Trainer> selectedTrainers =  list_18.getSelectedValuesList();
+				
+				List<Customer> selectedCustomers =  list_19.getSelectedValuesList();
+				
+				Response response = null;
+				
+				response = wc.addFitnessClass(new FitnessClass(textField_40.getText(), 
+						textField_41.getText(), new HashSet<Trainer>(selectedTrainers),new HashSet<Customer>(selectedCustomers)
+						));
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					label_23.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					label_23.setText(response.StatusText);
+				}
+				
+			}
+		});
+		btnCreateFitnessClass.setBounds(66, 590, 177, 25);
+		panelFitnessClass.add(btnCreateFitnessClass);
+		
+		JButton button_24 = new JButton("Cancel");
+		button_24.setBounds(313, 590, 88, 25);
+		panelFitnessClass.add(button_24);
+		
+		JLabel label_17 = new JLabel("Name:");
+		label_17.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_17.setBounds(37, 62, 70, 15);
+		panelFitnessClass.add(label_17);
+		
+		textField_40 = new JTextField();
+		textField_40.setColumns(10);
+		textField_40.setBounds(110, 60, 339, 19);
+		panelFitnessClass.add(textField_40);
+		
+		JLabel lblSchedule = new JLabel("Schedule:");
+		lblSchedule.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSchedule.setBounds(37, 93, 70, 15);
+		panelFitnessClass.add(lblSchedule);
+		
+		textField_41 = new JTextField();
+		textField_41.setColumns(10);
+		textField_41.setBounds(110, 91, 339, 19);
+		panelFitnessClass.add(textField_41);
+		
+		
 		textField_37.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
 			   
@@ -3150,6 +3291,181 @@ public class UI {
 			  
 
 			});
+		
+		
+		buttonModifyFitnessClass = new JButton("Modify");
+		buttonModifyFitnessClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				WorkoutController wc = new WorkoutController();
+
+				List<Trainer> selectedTrainers =  list_18.getSelectedValuesList();
+				
+				List<Customer> selectedCustomers =  list_19.getSelectedValuesList();
+				
+				Response response = null;
+				
+				selectedFitnessClass.setName(textField_40.getText());
+				selectedFitnessClass.setSchedule(textField_41.getText());
+				
+				selectedFitnessClass.setTrainers(new HashSet<Trainer>(selectedTrainers));
+				selectedFitnessClass.setCustomers(new HashSet<Customer>(selectedCustomers));
+				
+				response = wc.addFitnessClass(selectedFitnessClass);
+				
+				if(response.isSuccess)
+				{
+					clearAllTextBoxes(frame);
+					
+					label_23.setText(response.StatusText);
+					
+					final Timer timer = new Timer(1000, null);
+			        timer.addActionListener((al) -> {
+			            
+			        	setComponentVisibility(frame, JPanel.class, false);
+			        	
+			        	panelTrainerDashboard.setVisible(true);
+			        	
+			        	timer.stop();
+			        	
+			        });
+			        timer.start();
+				}else{
+					label_23.setText(response.StatusText);
+				}
+				
+			}
+		});
+		
+		buttonModifyFitnessClass.setBounds(66, 590, 177, 25);
+		panelFitnessClass.add(buttonModifyFitnessClass);
+		
+		JButton btnFitnessClass = new JButton("Create Fitness Class");
+		btnFitnessClass.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				btnCreateFitnessClass.setVisible(true);
+				buttonModifyFitnessClass.setVisible(false);
+				
+				label_23.setText("");
+				
+				trainers.clear();
+				customers.clear();
+				
+				for(Trainer t: UserController.getInstance().getTrainers()){
+					trainers.addElement(t);
+				}
+				
+				for(Customer c: UserController.getInstance().getCustomers()){
+					customers.addElement(c);
+				}
+				
+				 list_18.setModel(trainers);     
+				 scrollPane_18.getViewport().removeAll();
+				 scrollPane_18.setViewportView(list_18);
+				 
+				 list_19.setModel(customers);     
+				 scrollPane_19.getViewport().removeAll();
+				 scrollPane_19.setViewportView(list_19);
+				
+				 setComponentVisibility(frame, JPanel.class, false);
+		        	
+		        panelFitnessClass.setVisible(true);
+				
+			}
+		});
+		btnFitnessClass.setBounds(98, 462, 296, 25);
+		panelTrainerDashboard.add(btnFitnessClass);
+		
+		panelSelectFitnessClass = new JPanel();
+		panelSelectFitnessClass.setLayout(null);
+		frame.getContentPane().add(panelSelectFitnessClass, "name_6527861739897");
+		
+		scrollPane_20 = new JScrollPane();
+		scrollPane_20.setBounds(49, 83, 412, 303);
+		panelSelectFitnessClass.add(scrollPane_20);
+		
+		list_20 = new JList();
+		scrollPane_20.setViewportView(list_20);
+		
+		lblPleaseSelectA_3 = new JLabel("Please Select a Fitness Class");
+		lblPleaseSelectA_3.setBounds(140, 12, 238, 15);
+		panelSelectFitnessClass.add(lblPleaseSelectA_3);
+		
+		button_23 = new JButton("Modify");
+		button_23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				selectedFitnessClass = (FitnessClass) list_20.getSelectedValue();
+
+				label_23.setText("");
+				
+				btnCreateFitnessClass.setVisible(false);
+				btnModifyFitnessClass.setVisible(true);
+				
+				
+				trainers.clear();
+				
+				for(Trainer t: UserController.getInstance().getTrainers()){
+					trainers.addElement(t);
+				}
+				
+				 list_18.setModel(trainers);     
+				 scrollPane_18.getViewport().removeAll();
+				 scrollPane_18.setViewportView(list_18);
+				
+				 list_18.setSelectionMode(
+		                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+				 
+				 List<Integer> indices = new ArrayList<Integer>();
+				 
+				 for(Trainer tr : selectedFitnessClass.getTrainers()){
+					 indices.add(trainers.indexOf(tr));
+				 }
+				 
+				 int[] array = indices.stream().mapToInt(i->i).toArray();
+				 list_18.setSelectedIndices(array);
+				 
+				 customers.clear();
+					
+					for(Customer c: UserController.getInstance().getCustomers()){
+						customers.addElement(c);
+					}
+					
+					 list_19.setModel(customers);     
+					 scrollPane_19.getViewport().removeAll();
+					 scrollPane_19.setViewportView(list_19);
+					
+					 list_19.setSelectionMode(
+			                    ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+					 
+					 List<Integer> custIndices = new ArrayList<Integer>();
+					 
+					 for(Customer cu : selectedFitnessClass.getCustomers()){
+						 custIndices.add(customers.indexOf(cu));
+					 }
+					 
+					 int[] custArray = custIndices.stream().mapToInt(i->i).toArray();
+					 list_19.setSelectedIndices(custArray);
+				 
+				 
+				 
+				 textField_40.setText(selectedFitnessClass.getName());
+				 
+				 textField_41.setText(selectedFitnessClass.getSchedule());
+				 
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelFitnessClass.setVisible(true);
+				
+			}
+		});
+		button_23.setBounds(85, 398, 177, 25);
+		panelSelectFitnessClass.add(button_23);
+		
+		button_25 = new JButton("Cancel");
+		button_25.setBounds(315, 398, 88, 25);
+		panelSelectFitnessClass.add(button_25);
 		
 	}
 }

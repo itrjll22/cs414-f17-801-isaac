@@ -2074,6 +2074,25 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_6COhY8kIEeeY_6z9ZubsDw" name="workoutroutine" type="_R3kjQLrOEeeau4kXk1EeTQ" association="_6CN6UMkIEeeY_6z9ZubsDw"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_YdQ3wNoxEeer-9BifFr29Q" name="Fitness Class">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_b9h5gNoxEeer-9BifFr29Q" name="id" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_fAxBANoxEeer-9BifFr29Q" name="name" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_gch0YNoxEeer-9BifFr29Q" name="schedule" visibility="private" type="_xWQNILrNEeeau4kXk1EeTQ"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ldBSwNoxEeer-9BifFr29Q" name="customer" type="_R1W8wbrOEeeau4kXk1EeTQ" association="_lc-PcNoxEeer-9BifFr29Q"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ohg-gtoxEeer-9BifFr29Q" name="trainer" type="_R1WVsbrOEeeau4kXk1EeTQ" association="_ohfwYNoxEeer-9BifFr29Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_lc-PcNoxEeer-9BifFr29Q" memberEnd="_ldBSwNoxEeer-9BifFr29Q _ldBSwdoxEeer-9BifFr29Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ldAEoNoxEeer-9BifFr29Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ldArsNoxEeer-9BifFr29Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_ldBSwdoxEeer-9BifFr29Q" name="fitness class" type="_YdQ3wNoxEeer-9BifFr29Q" association="_lc-PcNoxEeer-9BifFr29Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_ohfwYNoxEeer-9BifFr29Q" memberEnd="_ohg-gtoxEeer-9BifFr29Q _ohg-g9oxEeer-9BifFr29Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ohg-gNoxEeer-9BifFr29Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ohg-gdoxEeer-9BifFr29Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_ohg-g9oxEeer-9BifFr29Q" name="fitness class" type="_YdQ3wNoxEeer-9BifFr29Q" association="_ohfwYNoxEeer-9BifFr29Q"/>
+    </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_xQEFkLrNEeeau4kXk1EeTQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_xSJwQLrNEeeau4kXk1EeTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>

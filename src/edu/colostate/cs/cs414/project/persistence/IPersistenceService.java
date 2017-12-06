@@ -7,6 +7,7 @@ import edu.colostate.cs.cs414.project.models.Customer;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
 import edu.colostate.cs.cs414.project.models.Exercise;
 import edu.colostate.cs.cs414.project.models.ExerciseSet;
+import edu.colostate.cs.cs414.project.models.FitnessClass;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -58,4 +59,8 @@ public interface IPersistenceService {
 	public List<Trainer> searchTrainers(String searchTerm);
 	
 	public List<EquipmentItem> searchEquipmentItems(String searchTerm);
+	
+	public boolean addFitnessClass(FitnessClass fitnessClasss);
+	
+	public List<FitnessClass> getFitnessClasses();
 }

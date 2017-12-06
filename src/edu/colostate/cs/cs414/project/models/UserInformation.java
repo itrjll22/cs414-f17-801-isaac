@@ -45,7 +45,7 @@ public class UserInformation {
 	private Address address;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//@JoinColumn(name = "healthInsuranceProvider_id")
+	@JoinColumn(name = "healthInsuranceProvider_id")
 	private HealthInsuranceProvider healthInsuranceProvider;
 	
 	public UserInformation(){

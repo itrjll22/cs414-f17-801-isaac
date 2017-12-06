@@ -10,6 +10,7 @@ import edu.colostate.cs.cs414.project.models.Email;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
 import edu.colostate.cs.cs414.project.models.Exercise;
 import edu.colostate.cs.cs414.project.models.ExerciseSet;
+import edu.colostate.cs.cs414.project.models.FitnessClass;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.ISearchable;
 import edu.colostate.cs.cs414.project.models.Manager;
@@ -154,6 +155,26 @@ public class WorkoutController {
 		
 		return dao.searchEquipmentItems(searchTerm);
 		
+		
+	}
+	
+	public Response addFitnessClass(FitnessClass fitnessClass){
+		
+		Response response = new Response();
+		response.StatusText = "Add FitnessClass unsuccessful.";
+		
+		if(dao.addFitnessClass(fitnessClass)){
+			response.isSuccess = true;
+			response.StatusText = "Add FitnessClass success!";
+		}
+		
+		return response;
+		
+	}
+	
+	public List<FitnessClass> getFitnessClasses(){
+		
+		return dao.getFitnessClasses();
 		
 	}
 	

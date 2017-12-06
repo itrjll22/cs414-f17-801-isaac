@@ -24,6 +24,7 @@ import edu.colostate.cs.cs414.project.models.Customer;
 import edu.colostate.cs.cs414.project.models.EquipmentItem;
 import edu.colostate.cs.cs414.project.models.Exercise;
 import edu.colostate.cs.cs414.project.models.ExerciseSet;
+import edu.colostate.cs.cs414.project.models.FitnessClass;
 import edu.colostate.cs.cs414.project.models.HealthInsuranceProvider;
 import edu.colostate.cs.cs414.project.models.Manager;
 import edu.colostate.cs.cs414.project.models.Trainer;
@@ -526,4 +527,41 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		return equipmentItems;
 	}
+	
+	public boolean addFitnessClass(FitnessClass fitnessClass){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			session.saveOrUpdate(fitnessClass);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public List<FitnessClass> getFitnessClasses(){
+		
+		Session session = sessionFactory.openSession();
+		
+		List<FitnessClass> fitnessClasses = new ArrayList<FitnessClass>();
+		
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
+
+		CriteriaQuery<FitnessClass> criteria = builder.createQuery(FitnessClass.class);
+		
+		criteria.from(FitnessClass.class);
+		
+		fitnessClasses = session.createQuery(criteria).getResultList();
+		
+		session.close();
+		
+		return fitnessClasses;
+	}
+	
 }

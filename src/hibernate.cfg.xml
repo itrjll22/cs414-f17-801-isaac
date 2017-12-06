@@ -37,6 +37,7 @@
       <mapping class = "edu.colostate.cs.cs414.project.models.EquipmentItem"/>
        <mapping class = "edu.colostate.cs.cs414.project.models.Exercise"/>
       <mapping class = "edu.colostate.cs.cs414.project.models.ExerciseSet"/>
+       <mapping class = "edu.colostate.cs.cs414.project.models.FitnessClass"/>
        <mapping class = "edu.colostate.cs.cs414.project.models.HealthInsuranceProvider"/>
       <mapping class = "edu.colostate.cs.cs414.project.models.Manager"/>
        <mapping class = "edu.colostate.cs.cs414.project.models.Phone"/>

@@ -1,11 +1,14 @@
 package edu.colostate.cs.cs414.project.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,6 +28,9 @@ public class Trainer {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn
 	private UserInformation userInformation;
+	
+	//@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//private Set<FitnessClass> fitnessClasses;
 	
 	private String workHours;
 	
