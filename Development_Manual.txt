@@ -3,8 +3,9 @@ Development Manual
 1. Download project from GitHub - https://github.com/itrjll22/cs414-f17-801-isaac.git
 2. Install MySql 5.5
 	Note: If you wish to connect to a remote MySql instance, skip this step.
-3. Create an empty schema in MySql 	
-4. Modify the following line in the hibernate.cfg.xml file.
+3. Create an empty schema in MySql named "gym_manager_hibernate"
+4. Run the initial_data.sql file in MySql	
+5. Modify the following line in the hibernate.cfg.xml file.
 
 	<property name = "hibernate.connection.url">
          jdbc:mysql://localhost:3306/gym_manager_hibernate
@@ -13,7 +14,7 @@ Development Manual
       Replace the "jdbc:mysql://localhost:3306/gym_manager_hibernate" with the url to the database that you want to connect to where 
       gym_manager_hibernate is replaced with the name of the schema created in step 3 above.
 
-5.  Modify the following lines with the username and password needed to access the schema created in step 2 above.
+6.  Modify the following lines with the username and password needed to access the schema created in step 2 above.
 	<property name = "hibernate.connection.username">
          root
       </property>
@@ -21,6 +22,6 @@ Development Manual
       <property name = "hibernate.connection.password">
          root
       </property>
-6. Run the edu.colostate.cs.cs.cs414.project.ui.login.java file as a Java Application
-7. Log in as Username:manager   Password: password123
+7. Run the edu.colostate.cs.cs.cs414.project.ui.UI.java file as a Java Application
+8. Log in as Username:itrjllManager   Password: password123
 
