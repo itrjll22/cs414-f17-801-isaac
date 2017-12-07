@@ -3,6 +3,7 @@ package edu.colostate.cs.cs414.project.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,14 @@ public class SecurityControllerTests {
 		userInfo.addPhone(new Phone("555-555-5555", "mobile"));
 		userInfo.addEmail(new Email("testacct@test.com", "student"));
 		userInfo.addAddress(new Address("123 Some Place", "", "Albuquerque", "NM", "87125"));
-		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider("Green Cross Green Shield"));	
+		
+		List<HealthInsuranceProvider> providers = dao.getHealthInsuranceProviders();
+		
+		if(providers.size() > 0){
+			userInfo.addHealthInsuranceProvider(providers.get(0));	
+		}
+		
+		
 		
 		Manager manager = new Manager(ua, userInfo);
 		

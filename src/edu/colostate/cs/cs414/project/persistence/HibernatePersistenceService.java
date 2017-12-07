@@ -186,6 +186,24 @@ public class HibernatePersistenceService implements IPersistenceService{
 		}
 	}
 	
+	public boolean deleteFitnessClass(FitnessClass t){
+		
+		Session session = sessionFactory.openSession();
+		
+		try{
+			session.beginTransaction();
+			FitnessClass dbT = (FitnessClass) session.get(FitnessClass.class, t.getId());
+			
+			session.delete(dbT);
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
 	public boolean addManager(Manager manager){
 		
 		Session session = sessionFactory.openSession();
@@ -342,13 +360,16 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		List<HealthInsuranceProvider> healthInsuranceProviders = new ArrayList<HealthInsuranceProvider>();
 		
-		try{
-			Query query = session.createQuery("from HealthInsuranceProvider");
-			healthInsuranceProviders = query.list();
-			session.close();
-		}catch(Exception e){
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
 
-		}
+		CriteriaQuery<HealthInsuranceProvider> criteria = builder.createQuery(HealthInsuranceProvider.class);
+		
+		criteria.from(HealthInsuranceProvider.class);
+		
+		healthInsuranceProviders = session.createQuery(criteria).getResultList();
+		
+		session.close();
 		
 		return healthInsuranceProviders;
 	}
@@ -358,31 +379,41 @@ public class HibernatePersistenceService implements IPersistenceService{
 		
 		List<Trainer> trainers = new ArrayList<Trainer>();
 		
-		try{
-			Query query = session.createQuery("from Trainer");
-			trainers = query.list();
-			session.close();
-		}catch(Exception e){
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
 
-		}
+		CriteriaQuery<Trainer> criteria = builder.createQuery(Trainer.class);
+		
+		criteria.from(Trainer.class);
+		
+		trainers = session.createQuery(criteria).getResultList();
+		
+		session.close();
 		
 		return trainers;
+		
 	}
 	
 	public List<Customer> getCustomers(){
+		
 		Session session = sessionFactory.openSession();
 		
 		List<Customer> customers = new ArrayList<Customer>();
 		
-		try{
-			Query query = session.createQuery("from Customer");
-			customers = query.list();
-			session.close();
-		}catch(Exception e){
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		
 
-		}
+		CriteriaQuery<Customer> criteria = builder.createQuery(Customer.class);
+		
+		criteria.from(Customer.class);
+		
+		customers = session.createQuery(criteria).getResultList();
+		
+		session.close();
 		
 		return customers;
+		
+		
 	}
 	
 	public List<EquipmentItem> getEquipmentItems(){

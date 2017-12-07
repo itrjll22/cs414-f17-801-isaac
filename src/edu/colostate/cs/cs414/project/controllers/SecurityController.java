@@ -27,6 +27,36 @@ public class SecurityController {
 	
 	private SecurityController(){
 		
+		/*
+		dao = HibernatePersistenceService.getInstance();
+		
+		UserAccount ua = new UserAccount("itrjllTrainer", "123123123");
+		
+	
+		UserInformation userInfo = new UserInformation();
+		userInfo.addNames("Isaac", "Trujillo");
+		userInfo.addPhone(new Phone("555-555-5555", "mobile"));
+		userInfo.addEmail(new Email("itrjll22@outlook.com", "personal"));
+		userInfo.addAddress(new Address("123 Some Place", "", "Albuquerque", "NM", "87125"));
+		userInfo.addHealthInsuranceProvider(new HealthInsuranceProvider("Green Cross Green Shield"));	
+		
+		Trainer trainer = new Trainer(ua, userInfo);
+		
+		dao.addTrainer(trainer);
+		
+		
+		UserAccount ua2 = new UserAccount("itrjllManager", "123123123");
+		
+		
+		UserInformation userInfo2 = new UserInformation();
+		userInfo2.addNames("Isaac", "Trujillo");
+		userInfo2.addPhone(new Phone("555-555-5555", "mobile"));
+		userInfo2.addEmail(new Email("itrjll22@colostate.edu", "student"));
+		userInfo2.addAddress(new Address("6437 5th St.", "Apt. 432", "Santa Fe", "NM", "87125"));
+		userInfo2.addHealthInsuranceProvider(new HealthInsuranceProvider("United HealthCare"));	
+		
+		dao.addManager(new Manager(ua2, userInfo2));
+		*/
 	}
 	
 	public static SecurityController getInstance(){ return instance;}

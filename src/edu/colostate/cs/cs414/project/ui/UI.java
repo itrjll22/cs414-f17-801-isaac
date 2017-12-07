@@ -554,6 +554,8 @@ public class UI {
 				
 				label_14.setText("");
 				
+				lbl_picture.setIcon(null);
+				
 				setComponentVisibility(frame, JPanel.class, false);
 				
 				panelEquipmentInventory.setVisible(true);
@@ -3045,6 +3047,15 @@ public class UI {
 		panelFitnessClass.add(btnCreateFitnessClass);
 		
 		JButton button_24 = new JButton("Cancel");
+		button_24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+				
+			}
+		});
 		button_24.setBounds(313, 590, 88, 25);
 		panelFitnessClass.add(button_24);
 		
@@ -3293,7 +3304,7 @@ public class UI {
 			});
 		
 		
-		buttonModifyFitnessClass = new JButton("Modify");
+		buttonModifyFitnessClass = new JButton("Save");
 		buttonModifyFitnessClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
@@ -3317,7 +3328,7 @@ public class UI {
 				{
 					clearAllTextBoxes(frame);
 					
-					label_23.setText(response.StatusText);
+					label_23.setText("Saves changed successfully.");
 					
 					final Timer timer = new Timer(1000, null);
 			        timer.addActionListener((al) -> {
@@ -3348,6 +3359,10 @@ public class UI {
 				buttonModifyFitnessClass.setVisible(false);
 				
 				label_23.setText("");
+				
+				textField_40.setText("");
+				
+				textField_41.setText("");
 				
 				trainers.clear();
 				customers.clear();
@@ -3401,7 +3416,7 @@ public class UI {
 				label_23.setText("");
 				
 				btnCreateFitnessClass.setVisible(false);
-				btnModifyFitnessClass.setVisible(true);
+				buttonModifyFitnessClass.setVisible(true);
 				
 				
 				trainers.clear();
@@ -3464,6 +3479,14 @@ public class UI {
 		panelSelectFitnessClass.add(button_23);
 		
 		button_25 = new JButton("Cancel");
+		button_25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				setComponentVisibility(frame, JPanel.class, false);
+				
+				panelTrainerDashboard.setVisible(true);
+			}
+		});
 		button_25.setBounds(315, 398, 88, 25);
 		panelSelectFitnessClass.add(button_25);
 		

@@ -34,6 +34,55 @@ public class Trainer {
 	
 	private String workHours;
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((qualifications == null) ? 0 : qualifications.hashCode());
+		result = prime * result + ((userAccount == null) ? 0 : userAccount.hashCode());
+		result = prime * result + ((userInformation == null) ? 0 : userInformation.hashCode());
+		result = prime * result + ((workHours == null) ? 0 : workHours.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Trainer other = (Trainer) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (qualifications == null) {
+			if (other.qualifications != null)
+				return false;
+		} else if (!qualifications.equals(other.qualifications))
+			return false;
+		if (userAccount == null) {
+			if (other.userAccount != null)
+				return false;
+		} else if (!userAccount.equals(other.userAccount))
+			return false;
+		if (userInformation == null) {
+			if (other.userInformation != null)
+				return false;
+		} else if (!userInformation.equals(other.userInformation))
+			return false;
+		if (workHours == null) {
+			if (other.workHours != null)
+				return false;
+		} else if (!workHours.equals(other.workHours))
+			return false;
+		return true;
+	}
+
 	private String qualifications;
 
 	public Trainer(){
