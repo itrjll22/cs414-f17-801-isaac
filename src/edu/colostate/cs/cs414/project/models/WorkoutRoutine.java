@@ -19,7 +19,7 @@ public class WorkoutRoutine implements ISearchable {
 	
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Exercise> exercises;
 	
 	

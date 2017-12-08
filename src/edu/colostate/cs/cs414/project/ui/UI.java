@@ -3328,7 +3328,7 @@ public class UI {
 				{
 					clearAllTextBoxes(frame);
 					
-					label_23.setText("Saves changed successfully.");
+					label_23.setText("Changes saved successfully.");
 					
 					final Timer timer = new Timer(1000, null);
 			        timer.addActionListener((al) -> {

@@ -26,7 +26,7 @@ public class Customer implements ISearchable {
 
 	
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<WorkoutRoutine> workoutRoutines;
 	
 	//@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
